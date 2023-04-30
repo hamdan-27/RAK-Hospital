@@ -20,7 +20,7 @@ if(isset($_POST['doctor-update'])){
         echo "<script>window.open('doctor_login.php','_self')</script>";
     } else {
         
-        echo "<script>alert('Sorry an error occurs')</script>";
+        echo "<script>alert('Sorry an error occurred')</script>";
         //echo "<script>window.open('adminpanel.php','_self')</script>";
     }
 } 
@@ -48,7 +48,7 @@ if(isset($_POST['patient-update'])){
         echo "<script>window.open('patient_login.php','_self')</script>";
     } else {
         
-        echo "<script>alert('Sorry an error occurs')</script>";
+        echo "<script>alert('Sorry an error occurred')</script>";
         //echo "<script>window.open('adminpanel.php','_self')</script>";
     }
 } 
@@ -72,7 +72,7 @@ if(isset($_POST['pharma-update'])){
         echo "<script>window.open('pharma_login.php','_self')</script>";
     } else {
         
-        echo "<script>alert('Sorry an error occurs')</script>";
+        echo "<script>alert('Sorry an error occurred')</script>";
         //echo "<script>window.open('adminpanel.php','_self')</script>";
     }
 } 

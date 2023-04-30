@@ -1,33 +1,12 @@
-<?php
-require('connection.php');
-require('login_process.php');
-$var1 = '';
-$var1 = $_SESSION['name'];
-$sql = "SELECT * FROM doctor WHERE name = '$var1'";
-$result = mysqli_query($conn, $sql);
-
-if (mysqli_num_rows($result) > 0) {
-  while ($row = mysqli_fetch_array($result)) {
-    $name =  $row['name'];
-    $email = $row['email'];
-    $address = $row['address'];
-    $designation = $row['speciality'];
-    $password =   $row['password'];
-  }
-} else {
-  echo "<script>alert('The record cant be found')</script>";
-  echo "<script>window.open('doctor_panel.php', '_self')</script>";
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
+<?php include('view_scripts.php') ?>
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Update Doctor Details - RAK Hospital</title>
+  <title>Appointments - RAK Hospital</title>
 
   <!-- Favicon -->
   <link href="assets\img\figma\logo_rak_hospital_sym.jpg" rel="icon">
@@ -50,6 +29,14 @@ if (mysqli_num_rows($result) > 0) {
 </head>
 
 <body>
+
+  <?php
+  require("login_process.php");
+  if (!isset($_SESSION['loggedin'])) {
+    //echo "logged out";
+    header('Location: patient_login.php');
+    exit();
+  } ?>
 
   <!-- ======= Top Bar ======= -->
   <div id="topbar" class="d-flex align-items-center fixed-top">
@@ -114,10 +101,10 @@ if (mysqli_num_rows($result) > 0) {
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Update Details</h2>
+          <h2>My Appointments</h2>
           <ol>
             <li><a href="doctor_panel.php">Home</a></li>
-            <li>Update Details</li>
+            <li>My Appointments</li>
           </ol>
         </div>
 
@@ -125,55 +112,40 @@ if (mysqli_num_rows($result) > 0) {
     </section><!-- End Breadcrumbs Section -->
 
     <section class="inner-page">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-3"></div>
-          <div class="col-md-6">
-            <div class="card">
-              <div class="card-body" style="background-color: #bb00ff; color: white; text-align: center;">
-                <h5>Update My Profile </h5>
+      <div class="container">
+        <div class="card">
+          <div class="card-body" style="background-color: #bb00ff ; color: white; border-color: #06F2F8;">
+            <div class="row">
+              <div class="col-md-3">
+                <a href="doctor_panel.php" class="btn btn-light">< Back</a>
               </div>
-              <div class="card-body">
-                <form class="form-group" action="update_scripts.php" method="POST" enctype="multipart/form-data">
-
-                  <label>Fullname</label>
-                  <input type="text" name="name" class="form-control" value="<?php echo $name; ?>" required>
-                  <br>
-
-                  <label>Email</label>
-                  <input type="text" name="email" class="form-control" value="<?php echo $email; ?>" required>
-                  <br>
-
-                  <label>Address</label>
-                  <input type="text" name="address" class="form-control" value="<?php echo $address; ?>" required>
-                  <br>
-
-                  <label>Speciality</label>
-                  <input type="text" name="speciality" class="form-control" value="<?php echo $designation; ?>" required>
-                  <br>
-
-                  <label>Password</label>
-                  <input type="text" name="password" class="form-control" value="<?php echo $password; ?>" required>
-                  <br><br>
-                  <center><input type="submit" name="doctor-update" value="Update Details" class="btn btn-warning"></center>
-                </form>
+              <div class="col-md-6">
+                <center>
+                  <b>
+                    <h1>Appointments</h1>
+                  </b>
+                </center>
               </div>
             </div>
           </div>
+          <div class="card-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Patient No.</th>
+                  <th scope="col">Doctor Name</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Symptoms</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
 
-          <div class="col-md-1">
-
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-            <script>
-              $(function() {
-                $('#time').combodate({
-                  firstItem: 'name', //show 'hour' and 'minute' string at first item of dropdown
-                  minuteStep: 1
-                });
-              });
-            </script>
-
+              <tbody>
+                <?php view_docappointment()?>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
