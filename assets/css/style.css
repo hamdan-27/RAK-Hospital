@@ -1779,3 +1779,19 @@ section {
   color: #fff;
   text-decoration: none;
 }
+
+.pat-card {
+  background-color: #bb00ff;
+}
+
+.doc-card {
+  background-color: royalblue;
+}
+
+.pharma-card {
+  background-color: green;
+}
+
+.admin-card {
+  background-color: rgb(0, 191, 255);
+}
