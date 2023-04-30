@@ -147,41 +147,32 @@
                         $var1 = '';
                         $var1 = $_SESSION['name'];
                         ?>
-                        
+
                         <marquee>
                             <h1>Welcome <?php echo $var1 ?></h1>
                         </marquee>
-                        
+
                     </div>
                 </div>
             </div>
             <br>
-        <!-- </center> -->
+            <!-- </center> -->
 
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="list-group">
-                            <class="list-group-item active" style="background-color: #bb00ff; color: white; border-color: #06F2F8;">
+                            <div class="card-body" style="background-color: #bb00ff; color: white; border-color: #06F2F8;">
                                 <h3 align="center">Preferences</h3>
-
                                 <a href="view_patient_appoint.php" class="list-group-item">View My Appointments</a>
                                 <a href="make_appointment.php" class="list-group-item">Make an Appointments</a>
 
+                            </div>
                         </div>
                         <hr>
-                        <div class="list-group">
-                            <class="list-group-item active" style="background-color: #bb00ff; color: white; border-color: #06F2F8;">
-                                <h3 align="center">Profile</h3>
-                                <a href="doctor_appoint.php" class="list-group-item">My Appointments</a>
-                                <a href="patient_order.php" class="list-group-item">My Drug Orders</a>
-                                <a href="patient_report.php" class="list-group-item">My Report</a>
-                                <a href="doctorupdate.php" class="list-group-item">Update My Profile</a>
-                                <a href="logout.php" class="list-group-item action">Log Out</a>
-                        </div>
-                        <hr>
+
                     </div>
-                    
+
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-body" style="background-color: #bb00ff; color: white; text-align: center;" ;>
@@ -216,6 +207,19 @@
                                 </form>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="list-group">
+                            <div class="card-body" style="background-color: #bb00ff; color: white; border-color: #06F2F8;">
+                                <h3 align="center">Profile</h3>
+                                <a href="doctor_appoint.php" class="list-group-item">My Appointments</a>
+                                <a href="patient_order.php" class="list-group-item">My Drug Orders</a>
+                                <a href="patient_report.php" class="list-group-item">My Report</a>
+                                <a href="doctorupdate.php" class="list-group-item">Update My Profile</a>
+                                <a href="logout.php" class="list-group-item action">Log Out</a>
+                        </div>
+                        </div>
+                        <hr>
                     </div>
                 </div>
             </div>
