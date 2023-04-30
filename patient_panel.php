@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php include('view_scripts.php') ?>
 
 <head>
     <meta charset="utf-8">
@@ -114,7 +115,7 @@
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
 
-            <!-- <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make an</span> Appointment</a> -->
+            <a href="make_appointment.php" class="appointment-btn"><span class="d-none d-md-inline">Make an</span> Appointment</a>
 
         </div>
     </header><!-- End Header -->
@@ -165,61 +166,57 @@
                             <div class="card-body" style="background-color: #bb00ff; color: white; border-color: #06F2F8;">
                                 <h3 align="center">Preferences</h3>
                                 <a href="view_patient_appoint.php" class="list-group-item">View My Appointments</a>
-                                <a href="make_appointment.php" class="list-group-item">Make an Appointments</a>
-
+                                <a href="make_appointment.php" class="list-group-item">Make an Appointment</a>
                             </div>
                         </div>
                         <hr>
-
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-body" style="background-color: #bb00ff; color: white; text-align: center;" ;>
-                                <h5>Patient Consultation </h5>
-                            </div>
-
-                            <div class="card-body">
-                                <form class="form-group" method="POST" enctype="multipart/form-data">
-
-                                    <label>Patient No</label>
-                                    <input type="text" name="pat_no" class="form-control" required>
-                                    <br>
-
-                                    <label>Diagnosis</label>
-                                    <input type="text" name="diagnosis" class="form-control" required><br>
-
-                                    <label>Psych Status</label>
-                                    <input type="text" name="psych" class="form-control" required>
-                                    <br>
-
-                                    <label>Chronic Disease Note</label>
-                                    <input type="text" name="chronic" class="form-control" required><br>
-
-                                    <label>Prescribed Medications</label>
-                                    <input type="text" name="drugs" class="form-control" required>
-                                    <br>
-
-                                    <label>Medical Advice</label>
-                                    <input type="text" name="advice" class="form-control" required><br>
-                                    <center><input type="submit" name="subreport" value="Submit Report" class="btn btn-secondary"></center>
-
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
                         <div class="list-group">
                             <div class="card-body" style="background-color: #bb00ff; color: white; border-color: #06F2F8;">
                                 <h3 align="center">Profile</h3>
                                 <a href="doctor_appoint.php" class="list-group-item">My Appointments</a>
                                 <a href="patient_order.php" class="list-group-item">My Drug Orders</a>
-                                <a href="patient_report.php" class="list-group-item">My Report</a>
+                                <!-- <a href="patient_report.php" class="list-group-item">My Report</a> -->
                                 <a href="doctorupdate.php" class="list-group-item">Update My Profile</a>
                                 <a href="logout.php" class="list-group-item action">Log Out</a>
+                            </div>
                         </div>
+                    </div>
+
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-body" style="background-color: #bb00ff ; color: white; border-color: #06F2F8;">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <center>
+                                            <b>
+                                                <h2>Your Report</h2>
+                                            </b>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Doctor</th>
+                                            <th scope="col">Diagnosis</th>
+                                            <th scope="col">Psyc Status</th>
+                                            <th scope="col">Disease</th>
+                                            <th scope="col">Medicine</th>
+                                            <th scope="col">Advice</th>
+                                            <th scope="col">Date</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <?php view_myreport() ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <hr>
                     </div>
                 </div>
             </div>
