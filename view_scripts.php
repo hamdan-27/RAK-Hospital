@@ -168,7 +168,6 @@ function view_myappointment()
 function view_myreport()
 {
   global $conn;
-  // require('patientvalidate.php');
   $var1 = '';
   $var1 = $_SESSION['name'];
   $sql = "SELECT * FROM report WHERE patient_name = '$var1'";
@@ -188,8 +187,6 @@ function view_myreport()
       $date = $row['date'];
 
       echo "<tr>
-      <td>$id</td>
-      <td>$patient_name</td>
       <td>$doctor_name</td>
       <td>$diagnosis</td>S
       <td>$psyc_status</td>   
@@ -198,6 +195,42 @@ function view_myreport()
       <td>$advice</td>   
       <td>$date</td>
     </tr>";
+    }
+  } else {
+    echo "<script>alert('The record cant be found')</script>";
+    //echo "<script>window.open('patientpanel.php', '_self')</script>";
+  }
+}
+
+function view_docappointment()
+{
+  global $conn;
+  $var1 = '';
+  $var1 = $_SESSION['name'];
+  $sql = "SELECT * FROM appointments WHERE doctor_name = '$var1'";
+  $result = mysqli_query($conn, $sql);
+  $final = mysqli_num_rows($result);
+  if ($final > 0) {
+    while ($row = mysqli_fetch_array($result)) {
+      $id =  $row['id'];
+      $pat_no =  $row['patient_no'];
+      $spec = $row['doctor_speciality'];
+      $doc = $row['doctor_name'];
+      $date = $row['appointment_date'];
+      $time = $row['appointment_time'];
+      $symp = $row['symptoms'];
+      
+      echo "<tr>
+        <form method='post'>
+          <td>$id</td> 
+          <td>$pat_no</td>
+          <td>$doc</td>
+          <td>$date</td>  
+          <td>$time</td>
+          <td>$symp</td>
+          <td><input type='submit' name='delete'  class='btn btn-danger' value='Cancel'></td> 
+       </form>
+      </tr>";
     }
   } else {
     echo "<script>alert('The record cant be found')</script>";
