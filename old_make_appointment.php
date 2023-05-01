@@ -1,21 +1,17 @@
 <?php
 require('connection.php');
-// require('view_scripts.php');
+require('view_scripts.php');
 require("login_process.php");
 
-// $var1 = '';
-$var1 = $_SESSION['name'];
-// $email = $_SESSION['email'];
-
-// if (!isset($_SESSION['loggedin'])) {
-//     //echo "logged out";
-//     header('Location: patient_login.php');
-//     exit();
-// }
+if (!isset($_SESSION['loggedin'])) {
+    //echo "logged out";
+    header('Location: patient_login.php');
+    exit();
+}
 
 if (isset($_POST['appoint-submit'])) {
     $var1 = '';
-    $var1 = $_SESSION['name'];
+    $var1 = $_SESSION['id'];
     $speciality = $_POST['speciality'];
     $doctor = $_POST['doctor'];
     $date = $_POST['date'];
@@ -23,23 +19,17 @@ if (isset($_POST['appoint-submit'])) {
     $symptoms = $_POST['symptoms'];
     $todayDate = date("Y-m-d H:i:s");
 
-    $tt = "SELECT * FROM `appointments`  WHERE doctor_name = '$doctor'  AND appointment_date = '$date';";
-
     $result1 = mysqli_query($conn, $tt);
-
+    $tt = "SELECT * FROM `appointments`  WHERE doctor_name = '$doctor'  AND appointment_date = '$date';";
     if (mysqli_num_rows($result1) > 0) {
-        echo "<script>alert('Sorry the Doctor isn't Free this time, Please Reappoint')</script>";
-        echo "<script>window.open('make_appointment.php','_self')</script>";
+        echo "<script>alert('Sorry the Doctor Isnt Free this time, Please Reappoint')</script>";
+        echo "<script>window.open('patient_appoint.php','_self')</script>";
     } else {
-
-        $sql = "INSERT INTO `appointment` (`id`, `patient_no`, `doctor_speciality`, `doctor_name`, `appointment_date`, `appointment_time`, `symptoms`, `date_registered`) 
-        VALUES (NULL, NULL, '$speciality', '$doctor', '$date', '$time', '$symptoms', '$todayDate')";
-
+        $sql = "INSERT INTO `appointment` (`id`, `patient_no`, `doctor_speciality`, `doctor_name`, `appointment_date`, `appointment_time`, `symptoms`, `date_registered`) VALUES (NULL, '$var1', '$speciality', '$doctor', '$date', '$time', '$symptoms', '$todayDate')";
         $result = mysqli_query($conn, $sql);
-
         if ($result) {
             echo "<script>alert('New Appointment Registered Succesfully')</script>";
-            echo "<script>window.open('make_appointment.php','_self')</script>";
+            echo "<script>window.open('patient_appoint.php','_self')</script>";
         } else {
             echo "<script>alert('Sorry an error occurs')</script>";
             //echo "<script>window.open('adminpanel.php','_self')</script>";
@@ -48,7 +38,6 @@ if (isset($_POST['appoint-submit'])) {
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -153,57 +142,17 @@ if (isset($_POST['appoint-submit'])) {
             </div>
         </section><!-- End Breadcrumbs Section -->
 
-        <!-- ======= Appointment Section ======= -->
-        <section id="appointment" class="inner-page appointment">
-            <div class="container">
+        <section class="inner-page">
+            <div class="container" style="width: 400px; margin-top:30px" ;>
+                <div class="card">
+                    <img src="assets\img\figma\appoint.png" class="mx-auto" style="padding: 10px;" height="100px" width="100">
+                    <div class="card-body">
 
-                <div class="section-title">
-                    <h2>Make an Appointment</h2>
-                </div>
-
-                <form method="post" role="form" class="php-email-form">
-                    <div class="row">
-                        <div class="col-md-4 form-group">
-                            <input type="text" name="name" class="form-control" id="name" value='<?php echo $var1 ?>' placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                            <div class="validate"></div>
-                        </div>
-                        <div class="col-md-4 form-group mt-3 mt-md-0">
-                            <select name="doctor" id="doctor" class="form-select">
-                                <option>Select Doctor</option>
-
+                        <form action='' class="form-group" method="POST">
+                            <label>Doctor Speciality</label>
+                            <select name="speciality" class="form-control">
+                                <option>Select Department</option>
                                 <?php
-
-                                $servername = "localhost";
-                                $username = "root";
-                                $password = "";
-                                $dbname = "medical_appointment";
-
-                                // Create connection
-                                $conn = new mysqli($servername, $username, $password, $dbname);
-
-                                // Check connection
-                                if ($conn->connect_error) {
-                                    die("Connection failed: " . $conn->connect_error);
-                                }
-
-                                $sql = "SELECT * From doctor";
-                                $result = mysqli_query($conn, $sql);
-                                $row = mysqli_num_rows($result);
-                                while ($row = mysqli_fetch_array($result)) {
-                                    echo "<option value='" . $row['name'] . "'>" . $row['name'] . "</option>";
-                                }
-
-                                ?>
-
-                            </select>
-                            <div class="validate"></div>
-                        </div>
-                        <div class="col-md-4 form-group mt-3 mt-md-0">
-                            <select name="speciality" id="department" class="form-select">
-                                <option value="">Select Department</option>
-
-                                <?php
-
                                 $servername = "localhost";
                                 $username = "root";
                                 $password = "";
@@ -223,36 +172,58 @@ if (isset($_POST['appoint-submit'])) {
                                 while ($row = mysqli_fetch_array($result)) {
                                     echo "<option value='" . $row['speciality'] . "'>" . $row['speciality'] . "</option>";
                                 }
-
                                 ?>
-
                             </select>
-                            <div class="validate"></div>
-                        </div>
+                            <br>
+
+                            <label>Doctor Name</label>
+                            <select name="doctor" class="form-control">
+                                <option>Select Doctor</option>
+                                <?php
+                                $servername = "localhost";
+                                $username = "root";
+                                $password = "";
+                                $dbname = "medical_appointment";
+
+                                // Create connection
+                                $conn = new mysqli($servername, $username, $password, $dbname);
+
+                                // Check connection
+                                if ($conn->connect_error) {
+                                    die("Connection failed: " . $conn->connect_error);
+                                }
+
+                                $sql = "SELECT * From doctor";
+                                $result = mysqli_query($conn, $sql);
+                                $row = mysqli_num_rows($result);
+                                while ($row = mysqli_fetch_array($result)) {
+                                    echo "<option value='" . $row['name'] . "'>" . $row['name'] . "</option>";
+                                }
+                                ?>
+                            </select>
+                            <br>
+
+                            <label>Appointment Date</label>
+                            <input type="date" name="date" class="form-control" placeholder="Select Date" required="">
+                            <br>
+
+                            <label>Appointment Time</label>
+                            <input type="time" name="time" class="form-control" placeholder="Select time" required="">
+                            <br>
+
+                            <label>Symptoms</label>
+                            <input type="text" name="symptoms" class="form-control" placeholder="Specify how you feel" required=""><BR>
+                            <br>
+
+                            <center>
+                                <input type="submit" name="appoint-submit" class="btn btn-primary" value="Submit Appointment">
+                            </center>
+
+                        </form>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4 form-group mt-3">
-                            <input type="date" name="date" class="form-control datepicker" id="date" placeholder="Select Date" required>
-                            <div class="validate"></div>
-                        </div>
-                        <div class="col-md-4 form-group mt-3">
-                            <input type="time" name="time" class="form-control" placeholder="Select time" required>
-                            <div class="validate"></div>
-                        </div>
-                        <div class="col-md-4 form-group mt-3">
-                            <input class="form-control" name="symptoms" placeholder="Symptoms" required>
-                            <div class="validate"></div>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <input type="submit" name="appoint-submit" class="btn btn-primary" value="Submit Appointment">
-                        <!-- <input type="submit" name="appoint-submit" class="btn btn-primary" value="Submit Appointment" style="background-color: #bb00ff; border-radius:20px;"> -->
-                    </div>
-                </form>
+                </div>
             </div>
         </section>
-        <!-- End Appointment Section -->
-
 
     </main><!-- End #main -->
 
