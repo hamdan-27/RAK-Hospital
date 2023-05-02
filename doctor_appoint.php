@@ -1,3 +1,27 @@
+<?php
+
+require('connection.php');
+
+if (isset($_POST['doc-delete'])) {
+  $id = $_POST['id'];
+  // $date = $_POST['date'];
+  // $time = $_POST['time'];
+
+  $sql = "DELETE FROM appointments WHERE id = '$id'";
+  $result = mysqli_query($conn, $sql);
+  if ($result) {
+    echo "<script>alert('Appointment Deleted Succesfully')</script>";
+    echo "<script>window.open('doctor_appoint.php','_self')</script>";
+  } else {
+
+    echo "<script>alert('Sorry an error occurred')</script>";
+    //echo "<script>window.open('adminpanel.php','_self')</script>";
+    //header("Location:adminpanel.php");
+  }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <?php include('view_scripts.php') ?>
@@ -74,6 +98,7 @@
               <li><a href="patient_login.php">Patient login</a></li>
               <li><a href="doctor_login.php">Doctor login</a></li>
               <li><a href="pharma_login.php">Pharmacist login</a></li>
+              <li><a href="admin_login.php">Admin login</a></li>
             </ul>
           </li>
           <li class="dropdown"><a href="#"><span>Sign up</span> <i class="bi bi-chevron-down"></i></a>
@@ -117,7 +142,8 @@
           <div class="card-body" style="background-color: #bb00ff ; color: white; border-color: #06F2F8;">
             <div class="row">
               <div class="col-md-3">
-                <a href="doctor_panel.php" class="btn btn-light">< Back</a>
+                <a href="doctor_panel.php" class="btn btn-light">
+                  < Back</a>
               </div>
               <div class="col-md-6">
                 <center>
@@ -132,8 +158,8 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">Patient No.</th>
+                  <th scope="col"></th>
+                  <th scope="col">Patient Name</th>
                   <th scope="col">Doctor Name</th>
                   <th scope="col">Date</th>
                   <th scope="col">Time</th>
@@ -143,7 +169,7 @@
               </thead>
 
               <tbody>
-                <?php view_docappointment()?>
+                <?php view_docappointment() ?>
               </tbody>
             </table>
           </div>
