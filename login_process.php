@@ -1,5 +1,4 @@
 <?php
-session_destroy();
 session_start();
 require('connection.php');
 
@@ -26,7 +25,7 @@ if (isset($_POST['doctorlogin'])) {
 } // END DOCTOR LOGIN PROCESS
 
 // PATIENT LOGIN PROCESS START
-else if (isset($_POST['patientlogin'])) {
+if (isset($_POST['patientlogin'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
@@ -34,12 +33,14 @@ else if (isset($_POST['patientlogin'])) {
     $result = mysqli_query($conn, $sql);
     $final = mysqli_num_rows($result);
 
-    if ($final >= 0) {
+    if ($final > 0) {
+        session_unset();
         while ($row = mysqli_fetch_array($result)) {
             $_SESSION['loggedin'] = TRUE;
             $_SESSION['name'] = $row['patient_name'];
             $_SESSION['email'] = $row['email'];
-
+            $session_name = $_SESSION['name'];
+            echo "<script> alert('Session name: $session_name'); </script>";
             header("Location: patient_panel.php");
         }
     } else {
@@ -49,7 +50,7 @@ else if (isset($_POST['patientlogin'])) {
 } // END PATIENT LOGIN PROCESS
 
 // PHARMACIST LOGIN PROCESS START
-else if (isset($_POST['pharmalogin'])) {
+if (isset($_POST['pharmalogin'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 

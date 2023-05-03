@@ -101,7 +101,7 @@ function view_report()
     while ($row = mysqli_fetch_array($result)) {
 
       $id = $row['id'];
-      $patient_name = $row['patient_no'];
+      $patient_name = $row['patient_name'];
       $doctor_name = $row['doctor_name'];
       $diagnosis = $row['diagnosis'];
       $psyc_status = $row['psyc_status'];
@@ -131,39 +131,82 @@ function view_report()
 function view_myappointment()
 {
   global $conn;
-  // require('patientvalidate.php');
-  $var1 = '';
-  $var1 = $_SESSION['id'];
-  $sql = "SELECT * FROM appointments WHERE patient_id = '$var1'";
+  require 'login_process.php';
+  
+  $var1 = $session_name;
+
+  // $var1 = $_SESSION['name'];
+  $sql = "SELECT * FROM appointments WHERE patient_name = '$var1';";
   $result = mysqli_query($conn, $sql);
   $final = mysqli_num_rows($result);
   if ($final > 0) {
     while ($row = mysqli_fetch_array($result)) {
       $id =  $row['id'];
-      $pat_no =  $row['patient_no'];
+      $pat_name =  $row['patient_name'];
       $spec = $row['doctor_speciality'];
-      $doc = $row['doctor_name'];
+      $doc_name = $row['doctor_name'];
       $date = $row['appointment_date'];
       $time = $row['appointment_time'];
       $symp = $row['symptoms'];
+      $dateReg = $row['date_registered'];
       
       echo "<tr>
         <form method='post'>
-         <td><input type='hidden' name='id'  class='form-control' value='$id' readonly>  </td> 
-        <td>$pat_no</td>
-        <td>$doc</td>
-        <td>$date</td>  
-        <td>$time</td>
-        <td>$symp</td>
-        <td><input type='submit' name='delete'  class='btn btn-danger' value='Cancel'>  </td> 
+          <td>$id</td> 
+          <td>$pat_name</td>
+          <td>$doc_name</td>
+          <td><input name='date'  class='form-control' value='$date' readonly></td>  
+          <td><input name='time'  class='form-control' value='$time' readonly></td>
+          <td>$symp</td>
+          <td><input type='submit' name='delete'  class='btn btn-danger' value='Cancel'></td> 
        </form>
       </tr>";
     }
   } else {
     echo "<script>alert('The record cant be found')</script>";
-    //echo "<script>window.open('patientpanel.php', '_self')</script>";
+    //echo "<script>window.open('patient_panel.php', '_self')</script>";
   }
 }
+
+// function view_myappointment(){
+//   global $conn;
+//   require('login_process.php');
+//      $var1 ='';
+//      $var1 = $_SESSION['id'];
+//      $sql = "SELECT * FROM appointment WHERE id = '$var1' ";
+//      $result = mysqli_query($conn, $sql);
+//      $final = mysqli_num_rows($result);
+//      if($final > 0){
+//      while ($row=mysqli_fetch_array($result)) {
+//       $id =  $row['id'];
+//       $patient_no =  $row['patient_no'];
+//       $doctor_speciality =  $row['doctor_speciality'];
+//       $doctor_name = $row['doctor_name'];
+//       $appdate = $row['appdate'];
+//       $apptime = $row['apptime'];
+//       $symptoms = $row['symptoms'];
+//       $date_registered = $row['date_registered'];
+//        echo "<tr>
+       
+//       <form method='post'>
+//        <td><input type='hidden' name='id'  class='form-control' value='$id' readonly>  </td> 
+//        <td>$id</td>
+//        <td>$patient_no</td>
+//        <td>$doctor_speciality</td>  
+//        <td>$doctor_name</td>
+//        <td>$appdate</td> 
+//        <td>$apptime</td> 
+//        <td>$symptoms</td> 
+//        <td>$date_registered</td> 
+//       <td><input type='submit' name='delete'  class='btn btn-danger' value='Cancel'>  </td> 
+//      </form>
+//     </tr>";
+//      }
+// }else{
+//       echo "<script>alert('The record cant be found')</script>";
+//       //echo "<script>window.open('patientpanel.php', '_self')</script>";
+// }
+// }
 
 function view_myreport()
 {
@@ -187,7 +230,7 @@ function view_myreport()
       $date = $row['date'];
 
       echo "<tr>
-      <td>$doctor_name</td>
+      <td>Dr. $doctor_name</td>
       <td>$diagnosis</td>S
       <td>$psyc_status</td>   
       <td>$chronic_disease</td>   
@@ -213,7 +256,7 @@ function view_docappointment()
   if ($final > 0) {
     while ($row = mysqli_fetch_array($result)) {
       $id =  $row['id'];
-      $pat_no =  $row['patient_no'];
+      $pat_name =  $row['patient_name'];
       $spec = $row['doctor_speciality'];
       $doc = $row['doctor_name'];
       $date = $row['appointment_date'];
@@ -222,13 +265,13 @@ function view_docappointment()
       
       echo "<tr>
         <form method='post'>
-          <td>$id</td> 
-          <td>$pat_no</td>
+          <td><input type='hidden' name='id' class='form-control' value='$id' readonly></td>  
+          <td>$pat_name</td>
           <td>$doc</td>
           <td>$date</td>  
           <td>$time</td>
           <td>$symp</td>
-          <td><input type='submit' name='delete'  class='btn btn-danger' value='Cancel'></td> 
+          <td><input type='submit' name='doc-delete'  class='btn btn-danger' value='Cancel'></td> 
        </form>
       </tr>";
     }
