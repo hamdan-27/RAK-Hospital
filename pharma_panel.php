@@ -1,12 +1,42 @@
+<?php
+
+require('connection.php');
+require('login_process.php');
+$var1 = '';
+$var1 = $_SESSION['name'];
+if (isset($_POST['add-drug'])) {
+  $name = $_POST['name'];
+  $barcode = $_POST['code'];
+  $ins = $_POST['ins'];
+  $status = $_POST['status'];
+  $price = $_POST['price'];
+  $quantity = $_POST['qty'];
+  $todayDate = date("Y-m-d H:i:s");
+
+  $sql = "INSERT INTO drug VALUES(null, '$name', '$barcode', '$ins', '$status', '$price', '$quantity', '$var1', '$todayDate')";
+  $result = mysqli_query($conn, $sql);
+  if ($result) {
+    echo "<script>alert('New Drug Registered Succesfully')</script>";
+    echo "<script>window.open('pharma_panel.php','_self')</script>";
+  } else {
+
+    echo "<script>alert('Sorry an error occurs')</script>";
+    //echo "<script>window.open('adminpanel.php','_self')</script>";
+    //ader("Location:adminpanel.php");
+
+  }
+}
+
+?>
+
 <!DOCTYPE html>
-<?php include('view_scripts.php') ?>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>View Reports - RAK Hospital</title>
+  <title>Pharmacist Home - RAK Hospital</title>
 
   <!-- Favicon -->
   <link href="assets\img\figma\logo_rak_hospital_sym.jpg" rel="icon">
@@ -56,7 +86,7 @@
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto active" href="index.html">Home</a></li>
+          <li><a class="nav-link scrollto active" href="pharma_panel.php">Home</a></li>
           <li><a class="nav-link scrollto" href="index.html#about">About</a></li>
           <li><a class="nav-link scrollto" href="index.html#services">Services</a></li>
           <li><a class="nav-link scrollto" href="index.html#departments">Departments</a></li>
@@ -81,8 +111,8 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make an</span>
-        Appointment</a>
+      <!-- <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make an</span>
+        Appointment</a> -->
 
     </div>
   </header><!-- End Header -->
@@ -94,10 +124,10 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>View Reports</h2>
+          <h2>Pharmacist Home</h2>
           <ol>
-            <li><a href="admin_panel.php">Home</a></li>
-            <li>View Reports</li>
+            <li><a href="pharma_panel.php">Home</a></li>
+            <li>Pharmacist Home</li>
           </ol>
         </div>
 
@@ -105,49 +135,109 @@
     </section><!-- End Breadcrumbs Section -->
 
     <section class="inner-page">
-      <div class="container">
-        <div class="card">
-          <div class="card-body" style="background-color: #3498DB ; color: white; border-color: #06F2F8;">
-            <div class="row">
-              <div class="col-md-3">
-                <a href="admin_panel.php" class="btn btn-light">< Back</a>
-              </div>
-              <div class="col-md-6">
-                <br>
-                <center>
-                  <b>
-                    <h1>Patient Reports</h1>
-                  </b>
-                </center>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">id</th>
-                  <th scope="col">patient_no</th>
-                  <th scope="col">doctor_name</th>
-                  <th scope="col">diagnosis</th>
-                  <th scope="col">psyc_status</th>
-                  <th scope="col">chronic_disease</th>
-                  <th scope="col">medications</th>
-                  <th scope="col">advice</th>
-                  <th scope="col">date</th>
+      <div class="container-fluid">
 
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                view_report();
-                ?>
-              </tbody>
-            </table>
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <?php
+            //session_start();
+            $var1 = '';
+            $var1 = $_SESSION['name'];
+            ?>
 
+            <marquee>
+              <h1 align="right">Welcome <?php echo $var1 ?> </h1>
+            </marquee>
           </div>
         </div>
       </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="list-group">
+              <div class="card-body" style="background-color: #1EBB6E; color: white; border-color: #06F2F8;">
+                <h3 align="center">Preferences ADD HREFS</h3>
+                <a href="" class="list-group-item">Add Drug Details</a>
+                <a href="" class="list-group-item">Update Drugs</a>
+                <a href="" class="list-group-item">Delete Drug</a>
+              </div>
+            </div>
+            <hr>
+            <div class="list-group">
+              <div class="card-body" style="background-color: #1EBB6E; color: white; border-color: #06F2F8;">
+                <h3 align="center">View Details</h3>
+                <a href="orderdetails.php" class="list-group-item">View Orders</a>
+                <a href="viewdrug.php" class="list-group-item action">View Drugs</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body" style="background-color: #1EBB6E; color: white; text-align: center;">
+                <h5>Add New Drug </h5>
+              </div>
+              <div class="card-body">
+                <form class="form-group" method="POST" enctype="multipart/form-data">
+
+                  <label>Drug Name</label>
+                  <input type="text" name="name" class="form-control" required><br>
+
+                  <label>Bar Code</label>
+                  <input type="text" name="code" class="form-control" required><br>
+
+                  <label>Insured</label>
+                  <SELECT type="text" name="ins" class="form-control" required>
+                    <option>Select Status</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                  </SELECT><br>
+
+                  <label>Availability</label>
+                  <SELECT type="text" name="status" class="form-control" required>
+                    <option>Select Status</option>
+                    <option>Available</option>
+                    <option>unAvailable</option>
+                  </SELECT><br>
+                  <label>Unit Price</label>
+                  <input type="number" name="price" class="form-control" required><br>
+
+                  <label>Quantity</label>
+                  <input type="number" name="qty" class="form-control" required><br>
+
+                  <center> <input type="submit" name="add-drug" value="Register Drug" class="btn btn-secondary"></center>
+
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="list-group">
+              <div class="card-body" style="background-color: #1EBB6E; color: white; border-color: #06F2F8;">
+                <h3 align="center">My Details</h3>
+
+                <a href="view_pharma_profile.php" class="list-group-item">My Profile</a>
+                <a href="pharma_update.php" class="list-group-item">Update My Profile</a>
+                <a href="logout.php" class="list-group-item">Log Out</a>
+
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+          <script>
+            $(function() {
+              $('#time').combodate({
+                firstItem: 'name', //show 'hour' and 'minute' string at first item of dropdown
+                minuteStep: 1
+              });
+            });
+          </script>
     </section>
 
   </main><!-- End #main -->
@@ -219,8 +309,6 @@
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </body>
 
 </html>

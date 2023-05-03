@@ -26,6 +26,20 @@
 
     <!-- Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
+
+    <style>
+        tr {
+            display: block;
+            float: left;
+            padding: 0px 60px 0px 60px;
+        }
+
+        th,
+        td {
+            display: block;
+            padding: 0px 60px 0px 60px;
+        }
+    </style>
 </head>
 
 <body>
@@ -101,6 +115,7 @@
                             <li><a href="patient_login.php">Patient login</a></li>
                             <li><a href="doctor_login.php">Doctor login</a></li>
                             <li><a href="pharma_login.php">Pharmacist login</a></li>
+                            <li><a href="admin_login.php">Admin login</a></li>
                         </ul>
                     </li>
                     <li class="dropdown"><a href="#"><span>Sign up</span> <i class="bi bi-chevron-down"></i></a>
@@ -164,25 +179,23 @@
                     <div class="col-md-3">
                         <div class="list-group">
                             <div class="card-body" style="background-color: #bb00ff; color: white; border-color: #06F2F8;">
-                                <h3 align="center">Preferences</h3>
-                                <a href="view_patient_appoint.php" class="list-group-item">View My Appointments</a>
-                                <a href="make_appointment.php" class="list-group-item">Make an Appointment</a>
+                                <h4 align="center">Profile</h4>
+                                <!-- <a href="patient_report.php" class="list-group-item">My Report</a> -->
+                                <a href="patient_update.php" class="list-group-item">Update My Profile</a>
+                                <a href="logout.php" class="list-group-item action">Log Out</a>
                             </div>
                         </div>
                         <hr>
                         <div class="list-group">
                             <div class="card-body" style="background-color: #bb00ff; color: white; border-color: #06F2F8;">
-                                <h3 align="center">Profile</h3>
-                                <a href="doctor_appoint.php" class="list-group-item">My Appointments</a>
-                                <a href="patient_order.php" class="list-group-item">My Drug Orders</a>
-                                <!-- <a href="patient_report.php" class="list-group-item">My Report</a> -->
-                                <a href="doctorupdate.php" class="list-group-item">Update My Profile</a>
-                                <a href="logout.php" class="list-group-item action">Log Out</a>
+                                <h4 align="center">Appointment</h4>
+                                <a href="view_patient_appoint.php" class="list-group-item">View My Appointments</a>
+                                <a href="make_appointment.php" class="list-group-item">Make an Appointment</a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-9">
+                    <div class="col-md-6">
                         <div class="card">
                             <div class="card-body" style="background-color: #bb00ff ; color: white; border-color: #06F2F8;">
                                 <div class="row">
@@ -199,7 +212,7 @@
                             </div>
                             <div class="card-body">
                                 <table class="table">
-                                    <thead>
+                                    <!-- <thead> -->
                                         <tr>
                                             <th scope="col">Doctor</th>
                                             <th scope="col">Diagnosis</th>
@@ -209,12 +222,22 @@
                                             <th scope="col">Advice</th>
                                             <th scope="col">Date</th>
                                         </tr>
-                                    </thead>
+                                    <!-- </thead> -->
 
-                                    <tbody>
+                                    <!-- <tbody> -->
                                         <?php view_myreport() ?>
-                                    </tbody>
+                                    <!-- </tbody> -->
                                 </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="list-group">
+                            <div class="card-body" style="background-color: #bb00ff; color: white; border-color: #06F2F8;">
+                                <h4 align="center">Medicines</h4>
+                                <a href="drugsearch.php" class="list-group-item">Search Drugs</a>
+                                <a href="drugorder.php" class="list-group-item">Order Drugs</a>
+                                <a href="view_patient_drugs.php" class="list-group-item">View My Orders</a>
                             </div>
                         </div>
                     </div>

@@ -1,12 +1,33 @@
+<?php
+require('connection.php');
+require('login_process.php');
+$var1 = '';
+$var1 = $_SESSION['name'];
+$sql = "SELECT * FROM pharmacist WHERE name = '$var1'";
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+  while ($row = mysqli_fetch_array($result)) {
+    $id = $row['pharmacist_id'];
+    $name =  $row['name'];
+    $email = $row['email'];
+    $address = $row['store_address'];
+    $password =   $row['password'];
+  }
+} else {
+  echo "<script>alert('The record cant be found')</script>";
+  echo "<script>window.open('pharma_panel.php', '_self')</script>";
+}
+?>
+
 <!DOCTYPE html>
-<?php include('view_scripts.php') ?>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>View Reports - RAK Hospital</title>
+  <title>Update Pharmacist - RAK Hospital</title>
 
   <!-- Favicon -->
   <link href="assets\img\figma\logo_rak_hospital_sym.jpg" rel="icon">
@@ -94,10 +115,10 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>View Reports</h2>
+          <h2>Update Pharmacist</h2>
           <ol>
-            <li><a href="admin_panel.php">Home</a></li>
-            <li>View Reports</li>
+            <li><a href="pharma_panel.php">Home</a></li>
+            <li>Update Pharmacist</li>
           </ol>
         </div>
 
@@ -105,49 +126,52 @@
     </section><!-- End Breadcrumbs Section -->
 
     <section class="inner-page">
-      <div class="container">
-        <div class="card">
-          <div class="card-body" style="background-color: #3498DB ; color: white; border-color: #06F2F8;">
-            <div class="row">
-              <div class="col-md-3">
-                <a href="admin_panel.php" class="btn btn-light">< Back</a>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3">
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body" style="background-color: #1EBB6E; color: white; text-align: center;">
+
+                <h5>Update My Profile </h5>
               </div>
-              <div class="col-md-6">
-                <br>
-                <center>
-                  <b>
-                    <h1>Patient Reports</h1>
-                  </b>
-                </center>
+              <div class="card-body">
+                <form class="form-group" action="doctorupdate_process.php" method="POST" enctype="multipart/form-data">
+
+                  <label>Name</label>
+                  <input type="text" name="name" class="form-control" value="<?php echo $name; ?>" required>
+                  <br>
+
+                  <label>Email</label>
+                  <input type="text" name="email" class="form-control" value="<?php echo $email; ?>" required>
+                  <br>
+
+                  <label>Store Address</label>
+                  <input type="text" name="address" class="form-control" value="<?php echo $address; ?>" required>
+                  <br>
+
+                  <label>Password</label>
+                  <input type="text" name="password" class="form-control" value="<?php echo $password; ?>" required>
+                  <br><br>
+                  <center><input type="submit" name="pharma-update" value="Update Details" class="btn btn-warning"></center>
+                </form>
               </div>
             </div>
           </div>
-          <div class="card-body">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">id</th>
-                  <th scope="col">patient_no</th>
-                  <th scope="col">doctor_name</th>
-                  <th scope="col">diagnosis</th>
-                  <th scope="col">psyc_status</th>
-                  <th scope="col">chronic_disease</th>
-                  <th scope="col">medications</th>
-                  <th scope="col">advice</th>
-                  <th scope="col">date</th>
 
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                view_report();
-                ?>
-              </tbody>
-            </table>
-
+          <div class=" col-md-1">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+            <script>
+              $(function() {
+                $('#time').combodate({
+                  firstItem: 'name', //show 'hour' and 'minute' string at first item of dropdown
+                  minuteStep: 1
+                });
+              });
+            </script>
           </div>
-        </div>
-      </div>
     </section>
 
   </main><!-- End #main -->
@@ -219,8 +243,6 @@
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </body>
 
 </html>

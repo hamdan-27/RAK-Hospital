@@ -30,36 +30,9 @@ if (mysqli_num_rows($result) > 0) {
 
 <body>
     <div class="col-md-3">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-
-            <a class="navbar-brand logo_h" href="index.html"><img src="images/rt.jpg" alt="" align="left"></a>
-        </div>
-
     </div>
     <div class="container-fluid">
-        <h1>Welcome <?php echo $var1 ?></h1>
-
         <div class="row">
-            <div class="col-md-3">
-                <div class="list-group">
-                    <class="list-group-item active" style="background-color: #FF00FF; color: white; border-color: #06F2F8;">
-                        <h3 align="center">Preferences</h3>
-
-                        <a href="doctorappointment.php" class="list-group-item">My Appointments</a>
-                        <a href="drugsearch.php" class="list-group-item">Search Drug</a>
-
-                </div>
-                <hr>
-                <div class="list-group">
-                    <class="list-group-item active" style="background-color: #FF00FF; color: white; border-color: #06F2F8;">
-                        <h3 align="center">View Details</h3>
-                        <a href="staffcomp.php" class="list-group-item action">View Patient Record</a>
-                        <a href="" class="list-group-item action">View My Appointments</a>
-
-                </div>
-            </div>
-
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body" style="background-color: #FF00FF; color: white; text-align: center;">
@@ -107,7 +80,7 @@ if (mysqli_num_rows($result) > 0) {
                         });
                     });
                 </script>
-            <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.js"></script>
+                <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.js"></script>
             <script type="text/javascript">
 	            $(document).ready(function(){
 				  Swal.fire({

@@ -74,6 +74,7 @@
               <li><a href="patient_login.php">Patient login</a></li>
               <li><a href="doctor_login.php">Doctor login</a></li>
               <li><a href="pharma_login.php">Pharmacist login</a></li>
+              <li><a href="admin_login.php">Admin login</a></li>
             </ul>
           </li>
           <li class="dropdown"><a href="#"><span>Sign up</span> <i class="bi bi-chevron-down"></i></a>

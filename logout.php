@@ -16,7 +16,7 @@ session_destroy();
 
 <body style="background-color:#3498DB;color:white;padding-top:100px;text-align:center;">
     <h3>You have logged out.</h3><br><br>
-    <a href="doctor_panel.php" class="btn btn-outline-light">Try Again</a>
+    <a href="index.html" class="btn btn-outline-light">Home</a>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
