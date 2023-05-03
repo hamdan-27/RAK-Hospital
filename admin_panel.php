@@ -1,3 +1,13 @@
+<?php
+session_start();
+//require("staffvalidate.php");
+if (!isset($_SESSION['loggedin'])) {
+	//echo "logged out";
+	header('Location: admin_login.php');
+	exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,6 +75,7 @@
               <li><a href="patient_login.php">Patient login</a></li>
               <li><a href="doctor_login.php">Doctor login</a></li>
               <li><a href="pharma_login.php">Pharmacist login</a></li>
+              <li><a href="admin_login.php">Admin login</a></li>
             </ul>
           </li>
           <li class="dropdown"><a href="#"><span>Sign up</span> <i class="bi bi-chevron-down"></i></a>
@@ -107,25 +118,25 @@
         <div class="row">
           <div class="col-md-3">
             <div class="list-group">
-              <class="list-group-item active" style="background-color: #3498DB ; color: white; border-color: #06F2F8;">
+              <div class="card-body" style="background-color: #3498DB ; color: white; border-color: #06F2F8;">
                 <h3 align="center">Registrations</h3>
-                <a href="" class="list-group-item action">Register Doctor</a>
-                <a href="patient.php" class="list-group-item action">Register Patient</a>
-                <a href="pharmacistreg.php" class="list-group-item action">Register Pharmacist</a>
-                <a href="patappoint.php" class="list-group-item action">Make Appointment</a>
-
+                <a href="doctor_register.php" class="list-group-item action">Register Doctor</a>
+                <a href="patient_register.php" class="list-group-item action">Register Patient</a>
+                <a href="pharma_register.php" class="list-group-item action">Register Pharmacist</a>
+                <a href="make_appointment.php" class="list-group-item action">Make Appointment</a>
+              </div>
             </div>
             <hr>
             <div class="list-group">
-              <class="list-group-item active" style="background-color: #3498DB ; color: white; border-color: #06F2F8;">
+              <div class="card-body" style="background-color: #3498DB ; color: white; border-color: #06F2F8;">
                 <h3 align="center">View Details</h3>
                 <a href="doctor_details.php" class="list-group-item action">View Doctors Details</a>
                 <a href="" class="list-group-item action">View Patients Details</a>
                 <a href="all_appointment.php" class="list-group-item action">View Appointment</a>
                 <a href="viewdrug.php" class="list-group-item action">View Drug Orders</a>
+              </div>
             </div>
           </div>
-
           <div class="col-md-6">
             <div class="card">
               <div class="card-body" style="background-color: #3498DB; color: white; text-align: center;" ;>
@@ -136,28 +147,41 @@
               <div class="card-body">
                 <form class="form-group" action="doctorreg.php" method="POST" enctype="multipart/form-data">
                   <label>Full Name</label>
-                  <input type="text" name="fullname" class="form-control" required><br>
-                  <label>Phone Number</label>
-                  <input type="text" name="number" class="form-control" required><br>
+                  <input type="text" name="fullname" class="form-control" placeholder="Doctor Name" required><br>
                   <label>Email</label>
-                  <input type="text" name="email" class="form-control" required="number"><br>
+                  <input type="text" name="email" class="form-control" placeholder="Doctor Email" required="number"><br>
                   <label>Speciality</label>
                   <select class="form-control" name="speciality">
-                    <option>Select...</option>
-                    <option>Accidents</option>
-                    <option>Cardiology</option>
-                    <option>Dentist</option>
-                    <option>Dermatology</option>
-                    <option>Surgery</option>
+                    <option value="">Select Department</option>
+
+                    <?php
+
+                    $servername = "localhost";
+                    $username = "root";
+                    $password = "";
+                    $dbname = "medical_appointment";
+
+                    // Create connection
+                    $conn = new mysqli($servername, $username, $password, $dbname);
+
+                    // Check connection
+                    if ($conn->connect_error) {
+                      die("Connection failed: " . $conn->connect_error);
+                    }
+
+                    $sql = "SELECT Distinct(speciality) From doctor;";
+                    $result = mysqli_query($conn, $sql);
+                    $row = mysqli_num_rows($result);
+                    while ($row = mysqli_fetch_array($result)) {
+                      echo "<option value='" . $row['speciality'] . "'>" . $row['speciality'] . "</option>";
+                    }
+
+                    ?>
                   </select><br>
-                  <label>Profile</label>
-                  <input type="text" name="profile" class="form-control" required><br>
 
                   <label>Password</label>
-                  <input type="password" name="password" id="pass" class="form-control" required><br>
+                  <input type="password" name="password" id="pass" class="form-control" placeholder="Enter Password" required><br>
 
-                  <label>Image</label>
-                  <input type="file" name="image" class="form-control" required><br>
                   <center> <input type="submit" name="doctorreg" value="Register Doctor" class="btn btn-primary"></center>
 
                 </form>
@@ -166,31 +190,24 @@
           </div>
 
           <div class="col-md-3">
-
-            <hr>
             <div class="list-group">
-              <class="list-group-item active" style="background-color: #3498DB ; color: white; border-color: #06F2F8;">
-                <h3 align="center">View Details</h3>
-
+              <div class="card-body" style="background-color: #3498DB ; color: white; border-color: #06F2F8;">
+                <h3 align="center">Profile</h3>
+                <a href="admin_update.php" class="list-group-item action">Update Profile</a>
                 <a href="logout.php" class="list-group-item action">Log Out</a>
-                <a href="" class="list-group-item action">View Appointment</a>
-                <a href="" class="list-group-item action">View Drug Orders</a>
+              </div>
             </div>
           </div>
-
-          <div class="col-md-1">
-
-
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-            <script>
-              $(function() {
-                $('#time').combodate({
-                  firstItem: 'name', //show 'hour' and 'minute' string at first item of dropdown
-                  minuteStep: 1
-                });
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+          <script>
+            $(function() {
+              $('#time').combodate({
+                firstItem: 'name', //show 'hour' and 'minute' string at first item of dropdown
+                minuteStep: 1
               });
-            </script>
+            });
+          </script>
     </section>
 
   </main><!-- End #main -->
