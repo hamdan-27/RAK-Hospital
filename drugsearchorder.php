@@ -1,11 +1,11 @@
 <?php
-// require('connection.php');
+require('connection.php');
 
-// if (isset($_POST['drug-order'])) {
-//   $drugname = $_POST['name'];
-// } else {
-//   $drugname = '';
-// }
+if (isset($_POST['drug-order'])) {
+  $drugname = $_POST['name'];
+} else {
+  $drugname = '';
+}
 
 ?>
 
@@ -119,6 +119,9 @@ require('login_process.php');
     </section><!-- End Breadcrumbs Section -->
 
     <section class="inner-page">
+        <div class="container">
+            <a href="drugsearch.php" class="btn btn-secondary">< Back</a>
+        </div>
       <div class="container" style="width: 400px;">
         <div class="card">
           <img src="assets\img\drug.jpg" class="mx-auto" style="padding:10px;" width="100" height="100">
@@ -128,26 +131,7 @@ require('login_process.php');
             </center><br>
             <form class="form-group" action="add_process.php" method="post">
               <label>Drug Name</label>
-              <select name="drug-name" class="form-control">
-                <option>Select Drug</option>
-                <?php
-                global $conn;
-
-                // Check connection
-                if ($conn->connect_error) {
-                  die("Connection failed: " . $conn->connect_error);
-                }
-
-                $sql = "SELECT * From drug;";
-                $result = mysqli_query($conn, $sql);
-                $row = mysqli_num_rows($result);
-                
-                while ($row = mysqli_fetch_array($result)) {
-                  echo "<option value='" . $row['name'] . "'>" . $row['name'] . "</option>";
-                }
-                
-                ?>
-              </select>
+              <input type="text" name="drug-name" class="form-control" value="<?php echo $drugname; ?>" placeholder="Enter drug name" required>
               <br>
 
               <label>Quantity</label>

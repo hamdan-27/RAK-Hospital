@@ -59,8 +59,35 @@ else if (isset($_POST['pharma-submit'])) {
     } else {
         echo "<script>alert('Sorry an error occured')</script>";
     }
-}   
+} 
+
+else if (isset($_POST['orderdrug'])) {
+
+    $drugname = $_POST['drug-name'];
+    $qty = $_POST['quantity'];
+    $address = $_POST['address'];
+    $patient = $_POST['patient-name'];
+    $todayDate = date("Y-m-d");
+    $stat = "successful";
+
+    $sql = "INSERT INTO orders 
+    VALUES(NULL, '$drugname', '$qty', '$address', '$patient', '$todayDate', '$stat');";
+
+    $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+    if ($result) {
+        echo "<head><title>Success</title></head>";
+        echo "<script>
+                alert('Order has been placed successfully. Thank you for shopping with us!');
+            </script>
+            <script>open('patient_panel.php');</script>";
+    } else {
+        echo "<script>alert('Could not place order.');</script>";
+        echo "<script>open('patient_panel.php');</script>";
+    }
+}
+
 else {
     echo "Fields required.";
 }
+
 ?>

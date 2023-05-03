@@ -9,6 +9,7 @@
             $final = mysqli_num_rows($result);
             
             if ($final > 0) {
+                $items = array();
                 while ($row = mysqli_fetch_array($result)) {
                     $name = $row['name'];
                     $barcode = $row['barcode'];
@@ -18,18 +19,32 @@
                     $quantity = $row['quantity'];
                     $registby = $row['registered_by'];
                     $date = $row['date'];
+                    
+                    array_push($items, $name, $barcode, $insured, $status, $price, $quantity, $registby, $date);    
 
                     echo "<tr>
-                    <td>$name</td>
-                    <td>$barcode</td>
-                    <td>$insured</td>
-                    <td>$status</td>
-                    <td>$price/- AED</td>
-                    <td><a href='drugorder.php'>Order</a></td>
+                        <form action='drugsearchorder.php' method='post'>
+                            <td><input name='name' class='form-control' value='$name' readonly></td>
+                            <td>$barcode</td>
+                            <td>$insured</td>
+                            <td>$status</td>
+                            <td>$price/- AED</td>
+                            <td><input type='submit' name='drug-order' value='Order'></td>
+                        </form>
                     </tr>";
-                }
+
+                    
+                } return $items;
             } else {
-                echo "<script>alert('The record cannot be found.')</script>";
+                echo "<tr>
+                        <td></td>
+                        <td></td>
+                        <td style='color:red;'>No results</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>";
+                echo "<script>alert('No records found.')</script>";
             }
         }
     }

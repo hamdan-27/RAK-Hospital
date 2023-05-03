@@ -1,5 +1,6 @@
+
 <!DOCTYPE html>
-<?php include('search_scripts.php') ?>
+<?php include('search_scripts.php'); ?>
 <html lang="en">
 
 <head>
@@ -110,7 +111,7 @@
           <div class="card-body" style="background-color: #3498DB; color: white; border-color: #06F2F8;">
             <div class="row">
               <div class="col-md-3">
-                <a href="patient_panel.php" class="btn btn-light">
+                <a href="drugsearch.php" class="btn btn-light">
                   < Back</a>
               </div>
               <div class="col-md-8">
@@ -135,7 +136,8 @@
               </thead>
               <tbody>
                 <?php
-                drug_search();
+                $items = drug_search();
+                // drug_search();
                 ?>
               </tbody>
             </table>
