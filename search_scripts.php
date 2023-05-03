@@ -24,7 +24,7 @@
                     <td>$barcode</td>
                     <td>$insured</td>
                     <td>$status</td>
-                    <td>$price</td>
+                    <td>$price/- AED</td>
                     <td><a href='drugorder.php'>Order</a></td>
                     </tr>";
                 }
