@@ -1,19 +1,18 @@
 <!DOCTYPE html>
+<?php include('search_scripts.php') ?>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Search Drugs - RAK Hospital</title>
+  <title>Drug Search Result - RAK Hospital</title>
 
   <!-- Favicon -->
   <link href="assets\img\figma\logo_rak_hospital_sym.jpg" rel="icon">
 
   <!-- Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
@@ -95,10 +94,10 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Search Drugs</h2>
+          <h2>Drug Search Result</h2>
           <ol>
             <li><a href="patient_panel.php">Home</a></li>
-            <li>Search Drugs</li>
+            <li>Drug Search Result</li>
           </ol>
         </div>
 
@@ -106,24 +105,44 @@
     </section><!-- End Breadcrumbs Section -->
 
     <section class="inner-page">
-    <div class="container" style="width: 400px; margin-top:30px" ;>
+      <div class="container" style="width: 750px;">
         <div class="card">
-            <img src="assets\img\drug.jpg" class="mx-auto" style="padding:10px;" width="100" height="100">
-            <div class="card-body">
+          <div class="card-body" style="background-color: #3498DB; color: white; border-color: #06F2F8;">
+            <div class="row">
+              <div class="col-md-3">
+                <a href="patient_panel.php" class="btn btn-light">
+                  < Back</a>
+              </div>
+              <div class="col-md-8">
                 <center>
-                    <h3> RAK Pharmacy Drug Search</h3>
-                </center><br>
-                <form class="form-group" action="drug_result.php" method="post">
-                    <label>Drug Name</label>
-                    <input type="text" name="name" class="form-control" placeholder="Enter drug name" required=""><br>
-
-                    <center>
-                        <input type="submit" name="searchdrug" class="btn btn-primary" value="Search">
-                    </center>
-                </form>
+                  <h3>Drug Search Result</h3>
+                </center>
+              </div>
+              <div class="col-md-1"></div>
             </div>
+          </div>
+          <div class="card-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Drug Name</th>
+                  <th scope="col">Barcode</th>
+                  <th scope="col">Insured</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Unit Price</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                drug_search();
+                ?>
+              </tbody>
+            </table>
+
+          </div>
         </div>
-    </div>
+      </div>
     </section>
 
   </main><!-- End #main -->
@@ -183,8 +202,7 @@
   </footer><!-- End Footer -->
 
   <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
@@ -197,7 +215,7 @@
   <script src="assets/js/main.js"></script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
 
 </body>
