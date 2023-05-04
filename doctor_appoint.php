@@ -58,7 +58,7 @@ if (isset($_POST['doc-delete'])) {
   require("login_process.php");
   if (!isset($_SESSION['loggedin'])) {
     //echo "logged out";
-    header('Location: patient_login.php');
+    header('Location: doctor_login.php');
     exit();
   } ?>
 
