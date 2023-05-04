@@ -86,6 +86,32 @@ else if (isset($_POST['orderdrug'])) {
     }
 }
 
+else if (isset($_POST['add-drug'])) {
+    require('login_process.php');
+
+    $id = $_SESSION['id'];
+    $drugname = $_POST['name'];
+    $barcode = $_POST['code'];
+    $insured = $_POST['ins'];
+    $avail = $_POST['status'];
+    $price = $_POST['price'];
+    $qty = $_POST['qty'];
+    $todayDate = date("Y-m-d");
+
+    $sql = "INSERT INTO drug VALUES(NULL, $drugname, $barcode, $insured, $avail, $price, $qty);";
+    $result = mysqli_query($conn, $sql);
+    if ($result) {
+        echo "<head><title>Success</title></head>";
+        echo "<script>
+                alert('Drug has been added successfully. Thank you for shopping with us!');
+            </script>";
+        echo "<script>open('pharma_panel.php');</script>";
+    } else {
+        echo "<script>alert('Could not add drug.');</script>";
+        // echo "<script>open('pharma_panel.php');</script>";
+    }
+}
+
 else {
     echo "Fields required.";
 }
