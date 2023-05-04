@@ -4,11 +4,11 @@ require('connection.php');
 require('login_process.php');
 
 if (isset($_POST['delete'])) {
-    // $id = $_POST['id'];
-    $date = $_POST['date'];
-    $time = $_POST['time'];
+    $id = $_POST['id'];
+    // $date = $_POST['date'];
+    // $time = $_POST['time'];
 
-    $sql = "DELETE FROM appointments WHERE appointment_date = $date AND appointment_time = $time";
+    $sql = "DELETE FROM appointments WHERE id = '$id'";
     $result = mysqli_query($conn, $sql);
     if ($result) {
         echo "<script>alert('Appointment Deleted Succesfully')</script>";
@@ -134,10 +134,10 @@ include('view_scripts.php');
                 <div class="card">
                     <div class="card-body" style="background-color: #3498DB; color: white; border-color: #06F2F8;">
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                             </div>
                             <div class="col-md-6">
-                                <!-- <img src="images/ap.jpg " width="200PX"> -->
+                                <h1>Your Appointments</h1>
                             </div>
                         </div>
                     </div>
@@ -146,7 +146,7 @@ include('view_scripts.php');
                             <thead>
                                 <tr>
                                     <th scope="col"></th>
-                                    <th scope="col">Patient Number</th>
+                                    <th scope="col">Patient Name</th>
                                     <th scope="col">Doctor Name</th>
                                     <th scope="col">Appointment Date</th>
                                     <th scope="col">Appointment Time</th>

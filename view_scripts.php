@@ -131,11 +131,10 @@ function view_report()
 function view_myappointment()
 {
   global $conn;
-  require 'login_process.php';
   
-  $var1 = $session_name;
+  $var1 = '';
+  $var1 = $_SESSION['name'];
 
-  // $var1 = $_SESSION['name'];
   $sql = "SELECT * FROM appointments WHERE patient_name = '$var1';";
   $result = mysqli_query($conn, $sql);
   $final = mysqli_num_rows($result);
@@ -152,11 +151,11 @@ function view_myappointment()
       
       echo "<tr>
         <form method='post'>
-          <td>$id</td> 
+          <td><input type='hidden' name='id' class='form-control' value='$id' readonly></td> 
           <td>$pat_name</td>
           <td>$doc_name</td>
-          <td><input name='date'  class='form-control' value='$date' readonly></td>  
-          <td><input name='time'  class='form-control' value='$time' readonly></td>
+          <td>$date</td>  
+          <td>$time</td>
           <td>$symp</td>
           <td><input type='submit' name='delete'  class='btn btn-danger' value='Cancel'></td> 
        </form>
@@ -271,7 +270,7 @@ function view_docappointment()
           <td>$date</td>  
           <td>$time</td>
           <td>$symp</td>
-          <td><input type='submit' name='doc-delete'  class='btn btn-danger' value='Cancel'></td> 
+          <td><input type='submit' name='doc-delete' class='btn btn-danger' value='Cancel'></td> 
        </form>
       </tr>";
     }
@@ -280,4 +279,41 @@ function view_docappointment()
     //echo "<script>window.open('patientpanel.php', '_self')</script>";
   }
 }
+
+function view_myorders() {
+  global $conn;
+  $var1 = '';
+  $var1 = $_SESSION['name'];
+
+  $sql = "SELECT * FROM orders WHERE patient = '$var1'";
+  $result = mysqli_query($conn, $sql);
+  $final = mysqli_num_rows($result);
+  if ($final > 0) {
+    while ($row = mysqli_fetch_array($result)) {
+      $id = $row['id'];
+      $drugname = $row['drug_name'];
+      $qty = $row['quantity'];
+      $address = $row['address'];
+      $patient = $row['patient'];
+      $date = $row['date'];
+      $stat = $row['status'];
+
+      echo "<tr>
+              <form method='post'>
+                <td><input type='hidden' name='id' class='form-control' value='$id' readonly></td>
+                <td>$drugname</td>
+                <td>$qty</td>
+                <td>$address</td>
+                <td>$patient</td>
+                <td>$date</td>
+                <td>$stat</td>
+                <td><input type='submit' name='cancel-order' class='btn btn-danger' value='Cancel'></td>
+              </form>
+            </tr>";
+    }
+  } else {
+    echo "<script>alert('No orders found');</script>";
+  }
+}
+
 ?>
