@@ -137,7 +137,7 @@ if (mysqli_num_rows($result) > 0) {
                 <h5>Update My Profile </h5>
               </div>
               <div class="card-body">
-                <form class="form-group" action="doctorupdate_process.php" method="POST" enctype="multipart/form-data">
+                <form class="form-group" action="update_scripts.php" method="POST" enctype="multipart/form-data">
 
                   <label>Name</label>
                   <input type="text" name="name" class="form-control" value="<?php echo $name; ?>" required>

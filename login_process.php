@@ -59,6 +59,7 @@ if (isset($_POST['pharmalogin'])) {
     if ($final >= 0) {
         while ($row = mysqli_fetch_array($result)) {
             $_SESSION['loggedin'] = TRUE;
+            $_SESSION['id'] = $row['id'];
             $_SESSION['name'] = $row['name'];
             $_SESSION['email'] = $row['email'];
 

@@ -158,7 +158,7 @@ if (isset($_POST['add-drug'])) {
             <div class="list-group">
               <div class="card-body" style="background-color: #1EBB6E; color: white; border-color: #06F2F8;">
                 <h3 align="center">Preferences ADD HREFS</h3>
-                <a href="" class="list-group-item">Add Drug Details</a>
+                <a href="add_drugs.php" class="list-group-item">Add Drug Details</a>
                 <a href="" class="list-group-item">Update Drugs</a>
                 <a href="" class="list-group-item">Delete Drug</a>
               </div>
