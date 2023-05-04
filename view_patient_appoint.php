@@ -1,5 +1,4 @@
 <?php
-
 require('connection.php');
 require('login_process.php');
 
@@ -20,7 +19,6 @@ if (isset($_POST['delete'])) {
         //header("Location:adminpanel.php");
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -132,7 +130,7 @@ include('view_scripts.php');
         <section class="inner-page">
             <div class="container">
                 <div class="card">
-                    <div class="card-body" style="background-color: #3498DB; color: white; border-color: #06F2F8;">
+                    <div class="card-body" style="background-color: #bb00ff; color: white; border-color: #06F2F8;">
                         <div class="row">
                             <div class="col-md-4">
                             </div>
