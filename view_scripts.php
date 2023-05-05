@@ -316,4 +316,39 @@ function view_myorders() {
   }
 }
 
+function view_pharma_orders() {
+  global $conn;
+  $var1 = $_SESSION['id'];
+
+  $sql = "SELECT * FROM orders WHERE registered_by = '$var1'";
+  $result = mysqli_query($conn, $sql);
+  $final = mysqli_num_rows($result);
+  if ($final > 0) {
+    while ($row = mysqli_fetch_array($result)) {
+      $id = $row['id'];
+      $drugname = $row['drug_name'];
+      $qty = $row['quantity'];
+      $address = $row['address'];
+      $patient = $row['patient'];
+      $date = $row['date'];
+      $stat = $row['status'];
+
+      echo "<tr>
+              <form method='post'>
+                <td><input type='hidden' name='id' class='form-control' value='$id' readonly></td>
+                <td>$drugname</td>
+                <td>$qty</td>
+                <td>$address</td>
+                <td>$patient</td>
+                <td>$date</td>
+                <td>$stat</td>
+                <td><input type='submit' name='cancel-order' class='btn btn-danger' value='Cancel'></td>
+              </form>
+            </tr>";
+    }
+  } else {
+    echo "<script>alert('No orders found');</script>";
+  }
+}
+
 ?>

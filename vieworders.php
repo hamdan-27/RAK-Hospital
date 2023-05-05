@@ -7,13 +7,13 @@
   </head>
 
   <body style="background:url('images/rak.jpg'); background-size:cover; opacity: 2 ; ">
-    <div class="container" style="width: 1000px; margin-top:100px" ;>
+    <div class="container">
       <div class="card">
-        <!<img src='dd.jpg' class="card-img-top" width="50px" height="150px">
+        <img src='dd.jpg' class="card-img-top" width="50px" height="150px">
           <div class="card-body" style="background-color: #3498DB ; color: white; border-color: #06F2F8;">
             <div class="row">
               <div class="col-md-3">
-                <a href="order_panel.php" class="btn btn-light">Click to go back</a>
+                <a href="order_panel.php" class="btn btn-light">< Back</a>
               </div>
               <div class="col-md-6">
                 <center><img src="dd.jpg " width="200PX"></center> <br>
