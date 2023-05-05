@@ -1,3 +1,38 @@
+<?php
+require('connection.php');
+require('view_scripts.php');
+require("login_process.php");
+
+if (!isset($_SESSION['loggedin'])) {
+    //echo "logged out";
+    header('Location: pharma_login.php');
+    exit();
+}
+
+if (isset($_POST['add-drug'])) {
+    $reg_by = $_SESSION['id'];
+    $drugname = $_POST['drug-name'];
+    $barcode = $_POST['code'];
+    $insured = $_POST['ins'];
+    $avail = $_POST['status'];
+    $price = $_POST['price'];
+    $qty = $_POST['qty'];
+    $todayDate = date("Y-m-d H:i:s");
+    
+    $sql = "INSERT INTO `drug`(`id`, `name`, `barcode`, `insured`, `status`, `price`, `quantity`, `registered_by`, `date`) VALUES (NULL, '$drugname', '$barcode', '$insured', '$avail', '$price', '$qty', '$reg_by', '$todayDate')";
+    $result = mysqli_query($conn, $sql);
+    if ($result) {
+        echo "<script>alert('New Drug Registered Succesfully')</script>";
+        echo "<script>window.open('pharma_panel.php','_self')</script>";
+    } else {
+        echo "<script>alert('Sorry an error occurred. $reg_by,  $drugname, $barcode, $insured, $avail, $price, $qty, $todayDate')</script>";
+        //echo "<script>window.open('adminpanel.php','_self')</script>";
+        //header("Location:adminpanel.php");
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -106,34 +141,37 @@
     <section class="inner-page">
       <div class="container">
         <div class="row">
-          <div class="col-md-3"></div>
+          <div class="col-md-3">
+            <a href="order_panel.php" class="btn btn-secondary">
+              < Back</a>
+          </div>
           <div class="col-md-6">
             <div class="card">
               <div class="card-body" style="background-color: #1EBB6E; color: white; text-align: center;">
-                <h5>Add New Drug </h5>
+                <h5>Add New Drug</h5>
               </div>
               <div class="card-body">
-                <form class="form-group" action='add_process.php' method="POST" enctype="multipart/form-data">
+                <form class="form-group" action='' method="POST">
 
                   <label>Drug Name</label>
-                  <input type="text" name="name" class="form-control" required><br>
+                  <input type="text" name="drug-name" class="form-control" required><br>
 
                   <label>Bar Code</label>
                   <input type="text" name="code" class="form-control" required><br>
 
                   <label>Insured</label>
-                  <SELECT type="text" name="ins" class="form-control" required>
+                  <select type="text" name="ins" class="form-control" required>
                     <option>Select Status</option>
                     <option>Yes</option>
                     <option>No</option>
-                  </SELECT><br>
+                  </select><br>
 
                   <label>Availability</label>
-                  <SELECT type="text" name="status" class="form-control" required>
+                  <select type="text" name="status" class="form-control" required>
                     <option>Select Status</option>
                     <option>Available</option>
                     <option>Unavailable</option>
-                  </SELECT><br>
+                  </select><br>
                   <label>Unit Price</label>
                   <input type="number" name="price" class="form-control" required><br>
 

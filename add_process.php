@@ -59,7 +59,7 @@ else if (isset($_POST['pharma-submit'])) {
     } else {
         echo "<script>alert('Sorry an error occured')</script>";
     }
-} 
+}
 
 else if (isset($_POST['orderdrug'])) {
 
@@ -86,34 +86,35 @@ else if (isset($_POST['orderdrug'])) {
     }
 }
 
-else if (isset($_POST['add-drug'])) {
-    require('login_process.php');
+// else if (isset($_POST['add-drug'])) {
+//     require('login_process.php');
 
-    $id = $_SESSION['id'];
-    $drugname = $_POST['name'];
-    $barcode = $_POST['code'];
-    $insured = $_POST['ins'];
-    $avail = $_POST['status'];
-    $price = $_POST['price'];
-    $qty = $_POST['qty'];
-    $todayDate = date("Y-m-d");
+//     $reg_by = $_SESSION['id'];
+//     $drugname = $_POST['drug-name'];
+//     $barcode = $_POST['code'];
+//     $insured = $_POST['ins'];
+//     $avail = $_POST['status'];
+//     $price = $_POST['price'];
+//     $qty = $_POST['qty'];
+//     $todayDate = date("Y-m-d H:i:s");
 
-    $sql = "INSERT INTO drug VALUES(NULL, $drugname, $barcode, $insured, $avail, $price, $qty);";
-    $result = mysqli_query($conn, $sql);
-    if ($result) {
-        echo "<head><title>Success</title></head>";
-        echo "<script>
-                alert('Drug has been added successfully. Thank you for shopping with us!');
-            </script>";
-        echo "<script>open('pharma_panel.php');</script>";
-    } else {
-        echo "<script>alert('Could not add drug.');</script>";
-        // echo "<script>open('pharma_panel.php');</script>";
-    }
-}
+//     $sql = "INSERT INTO drug (`id`,`name`,`barcode`,`insured`,`status`,`price`,`quantity`,`registered_by`,`date`)
+//     VALUES(NULL, $drugname, $barcode, $insured, $avail, $price, $qty, $reg_by, $todayDate);";
+//     $result = mysqli_query($conn, $sql);
+//     if ($result) {
+//         echo "<head><title>Success</title></head>";
+//         echo "<script>
+//                 alert('Drug has been added successfully. Thank you for shopping with us!');
+//             </script>";
+//         echo "<script>open('pharma_panel.php');</script>";
+//     } else {
+//         echo "<script>alert('Could not add drug. Session id: $reg_by', Drug: $drugname, Barcode: $barcode, Insure: $insured, Status: $avail, Price: $price, Qty: $qty);</script>";
+//         echo "<script>open('pharma_panel.php');</script>";
+//     }
+// }
 
-else {
-    echo "Fields required.";
-}
+// else {
+//     echo "Fields required.";
+// }
 
 ?>

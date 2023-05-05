@@ -144,6 +144,29 @@ if (isset($_POST['add-drug'])) {
             //session_start();
             $var1 = '';
             $var1 = $_SESSION['name'];
+            function view_profile($name)
+            {
+              require('connection.php');
+              $sql = "SELECT * FROM pharmacist WHERE name = '$name';";
+              $result = mysqli_query($conn, $sql);
+              $final = mysqli_num_rows($result);
+              if ($final > 0) {
+                while ($row = mysqli_fetch_array($result)) {
+                  $id = $row['pharmacist_id'];
+                  $pname = $row['name'];
+                  $email = $row['email'];
+                  $address = $row['store_address'];
+                  $pwd = $row['password'];
+
+                  echo "<tr>
+                          <td>$id</td>
+                          <td>$pname</td>
+                          <td>$email</td>
+                          <td>$address</td>
+                      </tr>";
+                }
+              }
+            }
             ?>
 
             <marquee>
@@ -159,8 +182,7 @@ if (isset($_POST['add-drug'])) {
               <div class="card-body" style="background-color: #1EBB6E; color: white; border-color: #06F2F8;">
                 <h3 align="center">Preferences ADD HREFS</h3>
                 <a href="add_drugs.php" class="list-group-item">Add Drug Details</a>
-                <a href="" class="list-group-item">Update Drugs</a>
-                <a href="" class="list-group-item">Delete Drug</a>
+                <a href="update_drugs.php" class="list-group-item">Update Drugs</a>
               </div>
             </div>
             <hr>
@@ -168,66 +190,52 @@ if (isset($_POST['add-drug'])) {
               <div class="card-body" style="background-color: #1EBB6E; color: white; border-color: #06F2F8;">
                 <h3 align="center">View Details</h3>
                 <a href="orderdetails.php" class="list-group-item">View Orders</a>
-                <a href="viewdrug.php" class="list-group-item action">View Drugs</a>
+                <a href="viewdrug.php" class="list-group-item action">View/Delete Drugs</a>
               </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="card">
-              <div class="card-body" style="background-color: #1EBB6E; color: white; text-align: center;">
-                <h5>Add New Drug </h5>
+              <div class="card-body" style="background-color: #1EBB6E ; color: white; border-color: #06F2F8;">
+                <div class="row">
+                  <div class="col-md-3">
+                  </div>
+                  <div class="col-md-6">
+                    <center><b>
+                        <h1>Your Profile</h1>
+                      </b></center>
+                  </div>
+                </div>
               </div>
               <div class="card-body">
-                <form class="form-group" method="POST" enctype="multipart/form-data">
-
-                  <label>Drug Name</label>
-                  <input type="text" name="name" class="form-control" required><br>
-
-                  <label>Bar Code</label>
-                  <input type="text" name="code" class="form-control" required><br>
-
-                  <label>Insured</label>
-                  <SELECT type="text" name="ins" class="form-control" required>
-                    <option>Select Status</option>
-                    <option>Yes</option>
-                    <option>No</option>
-                  </SELECT><br>
-
-                  <label>Availability</label>
-                  <SELECT type="text" name="status" class="form-control" required>
-                    <option>Select Status</option>
-                    <option>Available</option>
-                    <option>unAvailable</option>
-                  </SELECT><br>
-                  <label>Unit Price</label>
-                  <input type="number" name="price" class="form-control" required><br>
-
-                  <label>Quantity</label>
-                  <input type="number" name="qty" class="form-control" required><br>
-
-                  <center> <input type="submit" name="add-drug" value="Register Drug" class="btn btn-secondary"></center>
-
-                </form>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Store Address</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    view_profile($var1);
+                    ?>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
-
           <div class="col-md-3">
             <div class="list-group">
               <div class="card-body" style="background-color: #1EBB6E; color: white; border-color: #06F2F8;">
                 <h3 align="center">My Details</h3>
-
-                <a href="view_pharma_profile.php" class="list-group-item">My Profile</a>
                 <a href="pharma_update.php" class="list-group-item">Update My Profile</a>
                 <a href="logout.php" class="list-group-item">Log Out</a>
 
               </div>
             </div>
           </div>
-
-
-
-
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
           <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
           <script>
