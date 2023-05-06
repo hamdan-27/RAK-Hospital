@@ -316,33 +316,76 @@ function view_myorders() {
   }
 }
 
-function view_pharma_orders() {
+function view_pharma_drugs() {
   global $conn;
+  $var1 = '';
   $var1 = $_SESSION['id'];
 
-  $sql = "SELECT * FROM orders WHERE registered_by = '$var1'";
+  $sql = "SELECT * FROM drug WHERE registered_by = '$var1'";
   $result = mysqli_query($conn, $sql);
   $final = mysqli_num_rows($result);
   if ($final > 0) {
     while ($row = mysqli_fetch_array($result)) {
       $id = $row['id'];
-      $drugname = $row['drug_name'];
+      $drugname = $row['name'];
+      $barcode = $row['barcode'];
+      $insured = $row['insured'];
+      $status = $row['status'];
+      $price = $row['price'];
       $qty = $row['quantity'];
-      $address = $row['address'];
-      $patient = $row['patient'];
+      $reg_by = $row['registered_by'];
       $date = $row['date'];
-      $stat = $row['status'];
 
       echo "<tr>
               <form method='post'>
                 <td><input type='hidden' name='id' class='form-control' value='$id' readonly></td>
                 <td>$drugname</td>
+                <td>$barcode</td>
+                <td>$insured</td>
+                <td>$status</td>
+                <td>$price</td>
                 <td>$qty</td>
-                <td>$address</td>
-                <td>$patient</td>
                 <td>$date</td>
-                <td>$stat</td>
-                <td><input type='submit' name='cancel-order' class='btn btn-danger' value='Cancel'></td>
+                <td><input type='submit' name='delete-drug' class='btn btn-danger' value='Remove'></td>
+              </form>
+            </tr>";
+    }
+  } else {
+    echo "<script>alert('No orders found');</script>";
+  }
+}
+
+function view_pharma_drugs_update() {
+  global $conn;
+  $var1 = '';
+  $var1 = $_SESSION['id'];
+
+  $sql = "SELECT * FROM drug WHERE registered_by = '$var1'";
+  $result = mysqli_query($conn, $sql);
+  $final = mysqli_num_rows($result);
+  if ($final > 0) {
+    while ($row = mysqli_fetch_array($result)) {
+      $id = $row['id'];
+      $drugname = $row['name'];
+      $barcode = $row['barcode'];
+      $insured = $row['insured'];
+      $status = $row['status'];
+      $price = $row['price'];
+      $qty = $row['quantity'];
+      $reg_by = $row['registered_by'];
+      $date = $row['date'];
+
+      echo "<tr>
+              <form method='post' action='update_scripts.php'>
+                <td><input type='hidden' name='id' class='form-control' value='$id' readonly></td>
+                <td><input name='drugname' class='form-control' value='$drugname'></td>
+                <td><input name='barcode' class='form-control' value='$barcode'></td>
+                <td><input name='insured' class='form-control' value='$insured'></td>
+                <td><input name='status' class='form-control' value='$status'></td>
+                <td><input name='price' class='form-control' value='$price'></td>
+                <td><input name='qty' class='form-control' value='$qty'></td>
+                <td><input name='date' class='form-control' value='$date' readonly></td>
+                <td><input type='submit' name='update-drug' class='btn btn-primary' value='Update'></td>
               </form>
             </tr>";
     }
