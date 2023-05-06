@@ -20,16 +20,13 @@ function view_pharma_orders()
       $stat = $row['status'];
 
       echo "<tr>
-                <form method='post'>
-                  <td><input type='hidden' name='id' class='form-control' value='$id' readonly></td>
-                  <td>$drugname</td>
-                  <td>$qty</td>
-                  <td>$address</td>
-                  <td>$patient</td>
-                  <td>$date</td>
-                  <td>$stat</td>
-                  <td><input type='submit' name='cancel-order' class='btn btn-danger' value='Cancel'></td>
-                </form>
+                <td>$id</td>
+                <td>$drugname</td>
+                <td>$qty</td>
+                <td>$address</td>
+                <td>$patient</td>
+                <td>$date</td>
+                <td>$stat</td>
               </tr>";
     }
   } else {
