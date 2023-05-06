@@ -1,10 +1,9 @@
 <?php
 session_start();
-//require("staffvalidate.php");
 if (!isset($_SESSION['loggedin'])) {
-	//echo "logged out";
-	header('Location: admin_login.php');
-	exit();
+  //echo "logged out";
+  header('Location: admin_login.php');
+  exit();
 }
 ?>
 
@@ -119,6 +118,43 @@ if (!isset($_SESSION['loggedin'])) {
           <div class="col-md-3">
             <div class="list-group">
               <div class="card-body" style="background-color: #3498DB ; color: white; border-color: #06F2F8;">
+                <h3 align="center">View Details</h3>
+                <a href="viewdoctors.php" class="list-group-item action">Doctors Details</a>
+                <a href="viewpatient.php" class="list-group-item action">Patients Details</a>
+                <a href="viewreports.php" class="list-group-item action">Patients Reports</a>
+                <a href="view_all_appointments.php" class="list-group-item action">Appointments</a>
+                <a href="viewdrugs.php" class="list-group-item action">Medicines</a>
+                <a href="vieworders.php" class="list-group-item action">Drug Orders</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body" style="background-color: #3498DB; color: white; text-align: center;" ;>
+                <div class="dropdown">
+                  <h5>Add Administrator Access</h5>
+                </div>
+              </div>
+              <div class="card-body">
+                <form class="form-group" action="add_process.php" method="POST">
+                  <label>Username</label>
+                  <input type="text" name="username" class="form-control" placeholder="User Name" required>
+                  <br>
+                  <label>Email</label>
+                  <input type="text" name="email" class="form-control" placeholder="Email" required="number">
+                  <br>
+                  <label>Password</label>
+                  <input type="password" name="password" id="pass" class="form-control" placeholder="Set Password" required><br>
+                  <center>
+                    <input type="submit" name="admin-reg" value="Register Admin" class="btn btn-primary">
+                  </center>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="list-group">
+              <div class="card-body" style="background-color: #3498DB ; color: white; border-color: #06F2F8;">
                 <h3 align="center">Registrations</h3>
                 <a href="doctor_register.php" class="list-group-item action">Register Doctor</a>
                 <a href="patient_register.php" class="list-group-item action">Register Patient</a>
@@ -127,69 +163,6 @@ if (!isset($_SESSION['loggedin'])) {
               </div>
             </div>
             <hr>
-            <div class="list-group">
-              <div class="card-body" style="background-color: #3498DB ; color: white; border-color: #06F2F8;">
-                <h3 align="center">View Details</h3>
-                <a href="doctor_details.php" class="list-group-item action">View Doctors Details</a>
-                <a href="" class="list-group-item action">View Patients Details</a>
-                <a href="all_appointment.php" class="list-group-item action">View Appointment</a>
-                <a href="viewdrug.php" class="list-group-item action">View Drug Orders</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card">
-              <div class="card-body" style="background-color: #3498DB; color: white; text-align: center;" ;>
-                <div class="dropdown">
-                  <h5>Doctor Registration </h5>
-                </div>
-              </div>
-              <div class="card-body">
-                <form class="form-group" action="doctorreg.php" method="POST" enctype="multipart/form-data">
-                  <label>Full Name</label>
-                  <input type="text" name="fullname" class="form-control" placeholder="Doctor Name" required><br>
-                  <label>Email</label>
-                  <input type="text" name="email" class="form-control" placeholder="Doctor Email" required="number"><br>
-                  <label>Speciality</label>
-                  <select class="form-control" name="speciality">
-                    <option value="">Select Department</option>
-
-                    <?php
-
-                    $servername = "localhost";
-                    $username = "root";
-                    $password = "";
-                    $dbname = "medical_appointment";
-
-                    // Create connection
-                    $conn = new mysqli($servername, $username, $password, $dbname);
-
-                    // Check connection
-                    if ($conn->connect_error) {
-                      die("Connection failed: " . $conn->connect_error);
-                    }
-
-                    $sql = "SELECT Distinct(speciality) From doctor;";
-                    $result = mysqli_query($conn, $sql);
-                    $row = mysqli_num_rows($result);
-                    while ($row = mysqli_fetch_array($result)) {
-                      echo "<option value='" . $row['speciality'] . "'>" . $row['speciality'] . "</option>";
-                    }
-
-                    ?>
-                  </select><br>
-
-                  <label>Password</label>
-                  <input type="password" name="password" id="pass" class="form-control" placeholder="Enter Password" required><br>
-
-                  <center> <input type="submit" name="doctorreg" value="Register Doctor" class="btn btn-primary"></center>
-
-                </form>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-3">
             <div class="list-group">
               <div class="card-body" style="background-color: #3498DB ; color: white; border-color: #06F2F8;">
                 <h3 align="center">Profile</h3>
