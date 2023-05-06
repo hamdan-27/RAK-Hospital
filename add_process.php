@@ -61,6 +61,22 @@ else if (isset($_POST['pharma-submit'])) {
     }
 }
 
+else if (isset($_POST['admin-reg'])) {
+
+    $name = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $sql = "INSERT INTO `admin` VALUES(NULL,'$name', '$email', '$password')";
+    
+    $result = mysqli_query($conn, $sql);
+    if ($result) {
+        echo "<script>alert('New admin registered successfuly')</script>";
+    } else {
+        echo "<script>alert('Sorry an error occured')</script>";
+    }
+}
+
 else if (isset($_POST['orderdrug'])) {
 
     $drugname = $_POST['drug-name'];
