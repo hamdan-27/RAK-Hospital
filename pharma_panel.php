@@ -182,7 +182,7 @@ if (isset($_POST['add-drug'])) {
               <div class="card-body" style="background-color: #1EBB6E; color: white; border-color: #06F2F8;">
                 <h3 align="center">Preferences</h3>
                 <a href="add_drugs.php" class="list-group-item">Add Drug</a>
-                <a href="drug_update.php" class="list-group-item">Update Drugs</a>
+                <a href="drug_pharma_update.php" class="list-group-item">Update Drugs</a>
               </div>
             </div>
             <hr>
@@ -190,7 +190,7 @@ if (isset($_POST['add-drug'])) {
               <div class="card-body" style="background-color: #1EBB6E; color: white; border-color: #06F2F8;">
                 <h3 align="center">View Details</h3>
                 <a href="view_pharma_orders.php" class="list-group-item">View Orders</a>
-                <a href="viewdrug.php" class="list-group-item action">View/Delete Drugs</a>
+                <a href="view_pharma_drugs.php" class="list-group-item action">View/Delete Drugs</a>
               </div>
             </div>
           </div>
