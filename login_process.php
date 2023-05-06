@@ -52,17 +52,16 @@ if (isset($_POST['pharmalogin'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM  `pharmacist` WHERE `email` = '$email' AND `password` = '$password'";
+    $sql = "SELECT * FROM `pharmacist` WHERE `email` = '$email' AND `password` = '$password'";
     $result = mysqli_query($conn, $sql);
     $final = mysqli_num_rows($result);
 
-    if ($final >= 0) {
-        while ($row = mysqli_fetch_array($result)) {
+    if ($final > 0) {
+        while ($row = mysqli_fetch_array($result)) { //used to fetch data from database
             $_SESSION['loggedin'] = TRUE;
-            $_SESSION['id'] = $row['id'];
+            $_SESSION['id'] = $row['pharmacist_id'];
             $_SESSION['name'] = $row['name'];
-            $_SESSION['email'] = $row['email'];
-
+            // $_SESSION['email'] = $row['email'];
             header("Location: pharma_panel.php");
         }
     } else {
