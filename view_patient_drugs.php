@@ -10,7 +10,7 @@ if (isset($_POST['cancel-order'])) {
   $sql = "DELETE FROM orders WHERE id = '$id'";
   $result = mysqli_query($conn, $sql);
   if ($result) {
-    echo "<script>alert('Your order has beeen cancelled succesfully')</script>";
+    echo "<script>alert('Your order has been cancelled succesfully')</script>";
     echo "<script>window.open('patient_panel.php','_self')</script>";
   } else {
 
