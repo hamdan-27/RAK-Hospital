@@ -31,6 +31,42 @@ function view_order()
   }
 }
 
+function view_myorders() {
+  global $conn;
+  $var1 = '';
+  $var1 = $_SESSION['name'];
+
+  $sql = "SELECT * FROM orders WHERE patient = '$var1'";
+  $result = mysqli_query($conn, $sql);
+  $final = mysqli_num_rows($result);
+  if ($final > 0) {
+    while ($row = mysqli_fetch_array($result)) {
+      $id = $row['id'];
+      $drugname = $row['drug_name'];
+      $qty = $row['quantity'];
+      $address = $row['address'];
+      $patient = $row['patient'];
+      $date = $row['date'];
+      $stat = $row['status'];
+
+      echo "<tr>
+              <form method='post'>
+                <td><input type='hidden' name='id' class='form-control' value='$id' readonly></td>
+                <td>$drugname</td>
+                <td>$qty</td>
+                <td>$address</td>
+                <td>$patient</td>
+                <td>$date</td>
+                <td>$stat</td>
+                <td><input type='submit' name='cancel-order' class='btn btn-danger' value='Cancel'></td>
+              </form>
+            </tr>";
+    }
+  } else {
+    echo "<script>alert('No orders found');</script>";
+  }
+}
+
 function view_doctor()
 {
   global $conn;
@@ -128,6 +164,80 @@ function view_report()
   }
 }
 
+function view_myreport()
+{
+  global $conn;
+  $var1 = '';
+  $var1 = $_SESSION['name'];
+  $sql = "SELECT * FROM report WHERE patient_name = '$var1'";
+  $result = mysqli_query($conn, $sql);
+  // $final = mysqli_num_rows($result);
+  if ($result) {
+    while ($row = mysqli_fetch_array($result)) {
+
+      $id = $row['id'];
+      $patient_name = $row['patient_name'];
+      $doctor_name = $row['doctor_name'];
+      $diagnosis = $row['diagnosis'];
+      $psyc_status = $row['psyc_status'];
+      $chronic_disease = $row['chronic_disease'];
+      $medications = $row['medications'];
+      $advice = $row['advice'];
+      $date = $row['date'];
+
+      echo "<tr>
+      <td>Dr. $doctor_name</td>
+      <td>$diagnosis</td>S
+      <td>$psyc_status</td>   
+      <td>$chronic_disease</td>   
+      <td>$medications</td>   
+      <td>$advice</td>   
+      <td>$date</td>
+    </tr>";
+    }
+  } else {
+    echo "<script>alert('The record cant be found')</script>";
+    //echo "<script>window.open('patientpanel.php', '_self')</script>";
+  }
+}
+
+function view_appointment()
+{
+  global $conn;
+
+  $sql = "SELECT * FROM appointments;";
+  $result = mysqli_query($conn, $sql);
+  $final = mysqli_num_rows($result);
+  if ($final > 0) {
+    while ($row = mysqli_fetch_array($result)) {
+      $id =  $row['id'];
+      $pat_name =  $row['patient_name'];
+      $spec = $row['doctor_speciality'];
+      $doc_name = $row['doctor_name'];
+      $date = $row['appointment_date'];
+      $time = $row['appointment_time'];
+      $symp = $row['symptoms'];
+      $dateReg = $row['date_registered'];
+      
+      echo "<tr>
+        <form method='post'>
+          <td><input name='id' class='form-control' value='$id' readonly></td> 
+          <td>$pat_name</td>
+          <td>$doc_name, $spec</td>
+          <td>$date</td>  
+          <td>$time</td>
+          <td>$symp</td>
+          <td>$dateReg</td>
+          <td><input type='submit' name='delete-appoint' class='btn btn-danger' value='Delete'></td> 
+       </form>
+      </tr>";
+    }
+  } else {
+    echo "<script>alert('The record cant be found')</script>";
+    //echo "<script>window.open('patient_panel.php', '_self')</script>";
+  }
+}
+
 function view_myappointment()
 {
   global $conn;
@@ -167,83 +277,6 @@ function view_myappointment()
   }
 }
 
-// function view_myappointment(){
-//   global $conn;
-//   require('login_process.php');
-//      $var1 ='';
-//      $var1 = $_SESSION['id'];
-//      $sql = "SELECT * FROM appointment WHERE id = '$var1' ";
-//      $result = mysqli_query($conn, $sql);
-//      $final = mysqli_num_rows($result);
-//      if($final > 0){
-//      while ($row=mysqli_fetch_array($result)) {
-//       $id =  $row['id'];
-//       $patient_no =  $row['patient_no'];
-//       $doctor_speciality =  $row['doctor_speciality'];
-//       $doctor_name = $row['doctor_name'];
-//       $appdate = $row['appdate'];
-//       $apptime = $row['apptime'];
-//       $symptoms = $row['symptoms'];
-//       $date_registered = $row['date_registered'];
-//        echo "<tr>
-       
-//       <form method='post'>
-//        <td><input type='hidden' name='id'  class='form-control' value='$id' readonly>  </td> 
-//        <td>$id</td>
-//        <td>$patient_no</td>
-//        <td>$doctor_speciality</td>  
-//        <td>$doctor_name</td>
-//        <td>$appdate</td> 
-//        <td>$apptime</td> 
-//        <td>$symptoms</td> 
-//        <td>$date_registered</td> 
-//       <td><input type='submit' name='delete'  class='btn btn-danger' value='Cancel'>  </td> 
-//      </form>
-//     </tr>";
-//      }
-// }else{
-//       echo "<script>alert('The record cant be found')</script>";
-//       //echo "<script>window.open('patientpanel.php', '_self')</script>";
-// }
-// }
-
-function view_myreport()
-{
-  global $conn;
-  $var1 = '';
-  $var1 = $_SESSION['name'];
-  $sql = "SELECT * FROM report WHERE patient_name = '$var1'";
-  $result = mysqli_query($conn, $sql);
-  // $final = mysqli_num_rows($result);
-  if ($result) {
-    while ($row = mysqli_fetch_array($result)) {
-
-      $id = $row['id'];
-      $patient_name = $row['patient_name'];
-      $doctor_name = $row['doctor_name'];
-      $diagnosis = $row['diagnosis'];
-      $psyc_status = $row['psyc_status'];
-      $chronic_disease = $row['chronic_disease'];
-      $medications = $row['medications'];
-      $advice = $row['advice'];
-      $date = $row['date'];
-
-      echo "<tr>
-      <td>Dr. $doctor_name</td>
-      <td>$diagnosis</td>S
-      <td>$psyc_status</td>   
-      <td>$chronic_disease</td>   
-      <td>$medications</td>   
-      <td>$advice</td>   
-      <td>$date</td>
-    </tr>";
-    }
-  } else {
-    echo "<script>alert('The record cant be found')</script>";
-    //echo "<script>window.open('patientpanel.php', '_self')</script>";
-  }
-}
-
 function view_docappointment()
 {
   global $conn;
@@ -277,42 +310,6 @@ function view_docappointment()
   } else {
     echo "<script>alert('The record cant be found')</script>";
     //echo "<script>window.open('patientpanel.php', '_self')</script>";
-  }
-}
-
-function view_myorders() {
-  global $conn;
-  $var1 = '';
-  $var1 = $_SESSION['name'];
-
-  $sql = "SELECT * FROM orders WHERE patient = '$var1'";
-  $result = mysqli_query($conn, $sql);
-  $final = mysqli_num_rows($result);
-  if ($final > 0) {
-    while ($row = mysqli_fetch_array($result)) {
-      $id = $row['id'];
-      $drugname = $row['drug_name'];
-      $qty = $row['quantity'];
-      $address = $row['address'];
-      $patient = $row['patient'];
-      $date = $row['date'];
-      $stat = $row['status'];
-
-      echo "<tr>
-              <form method='post'>
-                <td><input type='hidden' name='id' class='form-control' value='$id' readonly></td>
-                <td>$drugname</td>
-                <td>$qty</td>
-                <td>$address</td>
-                <td>$patient</td>
-                <td>$date</td>
-                <td>$stat</td>
-                <td><input type='submit' name='cancel-order' class='btn btn-danger' value='Cancel'></td>
-              </form>
-            </tr>";
-    }
-  } else {
-    echo "<script>alert('No orders found');</script>";
   }
 }
 
@@ -351,7 +348,7 @@ function view_pharma_drugs() {
             </tr>";
     }
   } else {
-    echo "<script>alert('No orders found');</script>";
+    echo "<script>alert('No drugs found');</script>";
   }
 }
 
@@ -390,7 +387,7 @@ function view_pharma_drugs_update() {
             </tr>";
     }
   } else {
-    echo "<script>alert('No orders found');</script>";
+    echo "<script>alert('No drugs found');</script>";
   }
 }
 
