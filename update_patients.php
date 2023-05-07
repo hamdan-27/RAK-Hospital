@@ -21,11 +21,11 @@ if (isset($_POST['update-patient'])) {
 
     if ($result) {
         echo "<script>alert('Patient Updated Succesfully.')</script>";
-        // echo "<script>window.open('admin_panel.php','_self')</script>";
+        echo "<script>window.open('admin_panel.php','_self')</script>";
     } else {
         
         echo "<script>alert('Sorry an error occurred')</script>";
-        // echo "<script>window.open('admin_panel.php','_self')</script>";
+        echo "<script>window.open('admin_panel.php','_self')</script>";
     }
 }
 

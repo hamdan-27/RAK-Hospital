@@ -127,6 +127,18 @@ if (!isset($_SESSION['loggedin'])) {
                 <a href="vieworders.php" class="list-group-item action">Drug Orders</a>
               </div>
             </div>
+            <hr>
+            <div class="list-group">
+              <div class="card-body" style="background-color: #3498DB ; color: white; border-color: #06F2F8;">
+                <h3 align="center">Update Details</h3>
+                <a href="update_doctors.php" class="list-group-item action">Update Doctors</a>
+                <a href="update_patients.php" class="list-group-item action">Update Patients</a>
+                <a href="update_reports.php" class="list-group-item action">Update Patient Reports</a>
+                <a href="update_appointments.php" class="list-group-item action">Update Appointments</a>
+                <a href="update_drugs.php" class="list-group-item action">Update Medicines</a>
+                <a href="update_orders.php" class="list-group-item action">Update Orders</a>
+              </div>
+            </div>
           </div>
           <div class="col-md-6">
             <div class="card">

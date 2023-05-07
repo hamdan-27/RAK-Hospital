@@ -67,13 +67,15 @@ else if (isset($_POST['admin-reg'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $sql = "INSERT INTO `admin` VALUES(NULL,'$name', '$email', '$password')";
+    $sql = "INSERT INTO `admin` VALUES('$name', '$email', '$password')";
     
     $result = mysqli_query($conn, $sql);
     if ($result) {
         echo "<script>alert('New admin registered successfuly')</script>";
+        echo "<script>window.open('admin_panel.php', '_self');</script>";
     } else {
         echo "<script>alert('Sorry an error occured')</script>";
+        echo "<script>window.open('admin_panel.php', '_self');</script>";
     }
 }
 

@@ -146,7 +146,7 @@ else {
     <section class="inner-page">
       <div class="container">
         <div class="card">
-          <div class="card-body" style="background-color: #1EBB6E ; color: white; border-color: #06F2F8;">
+          <div class="card-body" style="background-color: #3498DB ; color: white; border-color: #06F2F8;">
             <div class="row">
               <div class="col-md-3">
                 <a href="admin_panel.php" class="btn btn-light">
