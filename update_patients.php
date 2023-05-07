@@ -3,24 +3,25 @@
 <html lang="en">
 <?php
 include('view_scripts.php');
-if (isset($_POST['update-drug'])) {
-    $drug_id = $_POST['id'];
-    $drugname = $_POST['drugname'];
-    $barcode = $_POST['barcode'];
-    $insured = $_POST['insured'];
-    $status = $_POST['status'];
-    $price = $_POST['price'];
-    $qty = $_POST['qty'];
-    $date = date("Y-m-d");
+if (isset($_POST['update-patient'])) {
+    $id = $_POST['id'];
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $address = $_POST['address'];
+    $dob = $_POST['dob'];
+    $gender = $_POST['gender'];
+    $disease = $_POST['disease'];
+    $password = $_POST['password'];
 
-    $sql = "UPDATE `drug` 
-    SET `name`='$drugname',`barcode`='$barcode',`insured`='$insured',`status`='$status',`price`='$price',`quantity`='$qty',`date`='$date' 
-    WHERE `id` = '$drug_id';";
+    $sql = "UPDATE `patient` 
+    SET `patient_name`='$name',`email`='$email',`phone`='$phone',`address`='$address',`dob`='$dob',`gender`='$gender',`disease`='$disease',`password`='$password' 
+    WHERE `patient_id` = '$id'";
     $result = mysqli_query($conn,$sql);
 
     if ($result) {
-        echo "<script>alert('Drug Updated Succesfully.')</script>";
-        echo "<script>window.open('admin_panel.php','_self')</script>";
+        echo "<script>alert('Patient Updated Succesfully.')</script>";
+        // echo "<script>window.open('admin_panel.php','_self')</script>";
     } else {
         
         echo "<script>alert('Sorry an error occurred')</script>";
@@ -37,7 +38,7 @@ else {
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Update Drugs - RAK Hospital</title>
+  <title>Update Patients - RAK Hospital</title>
 
   <!-- Favicon -->
   <link href="assets\img\figma\logo_rak_hospital_sym.jpg" rel="icon">
@@ -133,10 +134,10 @@ else {
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Update Drugs</h2>
+          <h2>Update Patients</h2>
           <ol>
             <li><a href="admin_panel.php">Home</a></li>
-            <li>Update Drugs</li>
+            <li>Update Patients</li>
           </ol>
         </div>
 
@@ -146,7 +147,7 @@ else {
     <section class="inner-page">
       <div class="container">
         <div class="card">
-          <div class="card-body" style="background-color: #1EBB6E ; color: white; border-color: #06F2F8;">
+          <div class="card-body" style="background-color: #3498DB ; color: white; border-color: #06F2F8;">
             <div class="row">
               <div class="col-md-3">
                 <a href="admin_panel.php" class="btn btn-light">
@@ -155,7 +156,7 @@ else {
               <div class="col-md-6">
                 <center>
                   <b>
-                    <h1>Drugs</h1>
+                    <h1>Patients</h1>
                   </b>
                 </center>
               </div>
@@ -166,20 +167,20 @@ else {
               <thead>
                 <tr>
                   <th scope="col">ID</th>
-                  <th scope="col">Drug Name</th>
-                  <th scope="col">Barcode</th>
-                  <th scope="col">Insured</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Price</th>
-                  <th scope="col">Quantity</th>
-                  <th scope="col">Reg_by</th>
-                  <th scope="col">Date</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Phone</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">Date of Birth</th>
+                  <th scope="col">Gender</th>
+                  <th scope="col">Disease</th>
+                  <th scope="col">Password</th>
                   <th scope="col"></th>
                 </tr>
               </thead>
 
               <tbody>
-                <?php update_drugs() ?>
+                <?php update_patient() ?>
               </tbody>
             </table>
           </div>
