@@ -171,7 +171,7 @@ if (!isset($_SESSION['loggedin'])) {
                 <a href="doctor_register.php" class="list-group-item action">Register Doctor</a>
                 <a href="patient_register.php" class="list-group-item action">Register Patient</a>
                 <a href="pharma_register.php" class="list-group-item action">Register Pharmacist</a>
-                <a href="make_appointment.php" class="list-group-item action">Make Appointment</a>
+                <a href="admin_make_appoint.php" class="list-group-item action">Make Appointment</a>
               </div>
             </div>
             <hr>
