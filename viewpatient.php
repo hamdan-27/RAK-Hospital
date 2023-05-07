@@ -1,5 +1,24 @@
 <?php 
-include('view_scripts.php') 
+require('connection.php');
+include('view_scripts.php');
+
+if (isset($_POST['delete-pat'])) {
+  $id = $_POST['id'];
+  // $date = $_POST['date'];
+  // $time = $_POST['time'];
+
+  $sql = "DELETE FROM patient WHERE id = '$id'";
+  $result = mysqli_query($conn, $sql);
+  if ($result) {
+    echo "<script>alert('The patient has been removed succesfully')</script>";
+    echo "<script>window.open('viewpatient.php','_self')</script>";
+  } else {
+
+    echo "<script>alert('Sorry an error occurred')</script>";
+    echo "<script>window.open('viewpatient.php','_self')</script>";
+    //header("Location:adminpanel.php");
+  }
+}
 ?> 
 <!DOCTYPE html>
 <html lang="en">
@@ -129,11 +148,13 @@ include('view_scripts.php')
                                 <tr>
                                     <th scope="col">ID</th>
                                     <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
                                     <th scope="col">Phone</th>
                                     <th scope="col">Address</th>
                                     <th scope="col">Date of Birth</th>
                                     <th scope="col">Gender</th>
                                     <th scope="col">Disease</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
