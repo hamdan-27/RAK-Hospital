@@ -1,5 +1,24 @@
 <?php 
+require('connection.php');
 include('view_scripts.php');
+
+if (isset($_POST['delete-doc'])) {
+  $id = $_POST['id'];
+  // $date = $_POST['date'];
+  // $time = $_POST['time'];
+
+  $sql = "DELETE FROM doctor WHERE id = '$id'";
+  $result = mysqli_query($conn, $sql);
+  if ($result) {
+    echo "<script>alert('The doctor has been removed succesfully')</script>";
+    echo "<script>window.open('viewdoctors.php','_self')</script>";
+  } else {
+
+    echo "<script>alert('Sorry an error occurred')</script>";
+    echo "<script>window.open('viewdoctors.php','_self')</script>";
+    //header("Location:adminpanel.php");
+  }
+}
 ?> 
 <!DOCTYPE html>
 <html lang="en">
@@ -127,11 +146,12 @@ include('view_scripts.php');
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col">Doctor ID</th>
+                                    <th scope="col">ID</th>
                                     <th scope="col">Doctor Name</th>
-                                    <th scope="col">Email Address</th>
+                                    <th scope="col">Email</th>
                                     <th scope="col">Address</th>
                                     <th scope="col">Speciality</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>

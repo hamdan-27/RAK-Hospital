@@ -2,21 +2,22 @@
 require('connection.php');
 include('view_scripts.php');
 
-if (isset($_POST['delete-order'])) {
+if (isset($_POST['delete-drug'])) {
   $id = $_POST['id'];
 
-  $sql = "DELETE FROM orders WHERE id = '$id'";
+  $sql = "DELETE FROM drug WHERE id = '$id'";
   $result = mysqli_query($conn, $sql);
   if ($result) {
-    echo "<script>alert('The order has been removed succesfully')</script>";
-    echo "<script>window.open('vieworders.php','_self')</script>";
+    echo "<script>alert('The drug has been removed succesfully')</script>";
+    echo "<script>window.open('viewdrugs.php','_self')</script>";
   } else {
 
     echo "<script>alert('Sorry an error occurred')</script>";
-    echo "<script>window.open('vieworders.php','_self')</script>";
+    echo "<script>window.open('viewdrugs.php','_self')</script>";
     //header("Location:adminpanel.php");
   }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +26,7 @@ if (isset($_POST['delete-order'])) {
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Registered Orders - RAK Hospital</title>
+    <title>Registered Drugs - RAK Hospital</title>
 
     <!-- Favicon -->
     <link href="assets\img\figma\logo_rak_hospital_sym.jpg" rel="icon">
@@ -113,10 +114,10 @@ if (isset($_POST['delete-order'])) {
             <div class="container">
 
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2>Registered Orders</h2>
+                    <h2>Registered Drugs</h2>
                     <ol>
                         <li><a href="admin_panel.php">Home</a></li>
-                        <li>Registered Orders</li>
+                        <li>Registered Drugs</li>
                     </ol>
                 </div>
 
@@ -134,7 +135,7 @@ if (isset($_POST['delete-order'])) {
                             </div>
                             <div class="col-md-6">
                                 <center><b>
-                                        <h1>Registered Orders</h1>
+                                        <h1>Registered Drugs</h1>
                                     </b></center>
                             </div>
                         </div>
@@ -144,17 +145,20 @@ if (isset($_POST['delete-order'])) {
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Patient</th>
                                     <th scope="col">Drug Name</th>
+                                    <th scope="col">Barcode</th>
+                                    <th scope="col">Insured</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Price</th>
                                     <th scope="col">Quantity</th>
-                                    <th scope="col">Delivery Address</th>
+                                    <th scope="col">Registered By</th>
                                     <th scope="col">Date</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                view_order();
+                                view_drugs();
                                 ?>
                             </tbody>
                         </table>

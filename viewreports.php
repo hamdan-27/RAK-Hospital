@@ -1,5 +1,24 @@
 <!DOCTYPE html>
-<?php include('view_scripts.php') ?>
+<?php 
+require('connection.php');
+include('view_scripts.php');
+
+if (isset($_POST['delete-order'])) {
+  $id = $_POST['id'];
+
+  $sql = "DELETE FROM report WHERE id = '$id'";
+  $result = mysqli_query($conn, $sql);
+  if ($result) {
+    echo "<script>alert('The report has been removed succesfully')</script>";
+    echo "<script>window.open('viewreports.php','_self')</script>";
+  } else {
+
+    echo "<script>alert('Sorry an error occurred')</script>";
+    echo "<script>window.open('viewreports.php','_self')</script>";
+    //header("Location:adminpanel.php");
+  }
+}
+?>
 <html lang="en">
 
 <head>
@@ -126,16 +145,16 @@
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th scope="col">id</th>
-                  <th scope="col">patient_no</th>
-                  <th scope="col">doctor_name</th>
-                  <th scope="col">diagnosis</th>
-                  <th scope="col">psyc_status</th>
-                  <th scope="col">chronic_disease</th>
-                  <th scope="col">medications</th>
-                  <th scope="col">advice</th>
-                  <th scope="col">date</th>
-
+                  <th scope="col">ID</th>
+                  <th scope="col">Patient Name</th>
+                  <th scope="col">Doctor Name</th>
+                  <th scope="col">Diagnosis</th>
+                  <th scope="col">Psyc Status</th>
+                  <th scope="col">Chronic Disease</th>
+                  <th scope="col">Medicine</th>
+                  <th scope="col">Advice</th>
+                  <th scope="col">Date</th>
+                  <th scope="col"></th>
                 </tr>
               </thead>
               <tbody>
