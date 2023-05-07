@@ -4,7 +4,6 @@
 <?php
 include('view_scripts.php');
 if (isset($_POST['update-drug'])) {
-    $pharma_id = $_SESSION['id'];
     $drug_id = $_POST['id'];
     $drugname = $_POST['drugname'];
     $barcode = $_POST['barcode'];
