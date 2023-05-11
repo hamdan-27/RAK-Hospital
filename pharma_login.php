@@ -94,10 +94,10 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Doctor Login</h2>
+          <h2>Pharmacist Login</h2>
           <ol>
             <li><a href="index.html">Home</a></li>
-            <li>Doctor Login</li>
+            <li>Pharmacist Login</li>
           </ol>
         </div>
 

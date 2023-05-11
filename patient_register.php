@@ -111,7 +111,10 @@
                 </center>
                 <form class="form-group" action="add_process.php" method="post">
                     <br>
-                    <input type="text" name="name" class="form-control" placeholder="Full name" required>
+                    <input type="text" name="patient_id" class="form-control" placeholder="ID" required>
+                    <br>
+
+                    <input type="text" name="patient_name" class="form-control" placeholder="Full name" required>
                     <br>
 
                     <input type="email" name="email" class="form-control" placeholder="Email" required>

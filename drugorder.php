@@ -1,14 +1,3 @@
-<?php
-// require('connection.php');
-
-// if (isset($_POST['drug-order'])) {
-//   $drugname = $_POST['name'];
-// } else {
-//   $drugname = '';
-// }
-
-?>
-
 <!DOCTYPE html>
 <?php
 // require('drug_result.php');

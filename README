@@ -1,0 +1,57 @@
+RAK Hospital - Medical Appointment System
+==========================================
+Welcome to the RAK Hospital Medical Appointment System, a modern application designed to streamline the appointment booking process and enhance the overall patient experience.
+
+Features
+----------------
+* Online appointment booking: 
+
+Patients can book their appointments with their preferred doctors from the comfort of their homes or workplaces. The system provides real-time availability of doctors and enables patients to select a time slot that works for them.
+
+
+* Online appointment cancelling/rescheduling:
+
+Patients can cancel or reschedule their appointments at any time, with the system automatically updating the doctor's schedule accordingly.
+
+
+* Online Drug Search: 
+
+Patients can search for the availability of drugs in the hospital's pharmacy online.
+
+
+* Online ordering of drugs: 
+
+Patients can order drugs online and select the option of home delivery or in-hospital pickup.
+
+
+* Online access to medical reports: 
+
+Patients can access their medical reports online without physically going to the hospital.
+
+
+* Cross-platform compatibility: 
+
+The system can be accessed on both web and mobile devices, making it easy for patients to access the system from anywhere, at any time.
+
+* Secured login and registration: 
+
+Patients can create an account and login securely to access the system and book their appointments.
+
+
+## Technologies Used
+--------------------
+* Backend Database: 
+
+The system is connected to a backend database to store patient information, doctor information, appointment schedules, drug inventories, and medical reports.
+
+
+Cross-platform development: 
+
+The system is developed using cross-platform development technologies to ensure compatibility on both web and mobile devices.
+Secure login and registration: The system employs industry-standard encryption algorithms to ensure secure user login and registration.
+E-marketing integration: The system is integrated with e-marketing techniques to enhance communication with patients, provide promotional offers, and notify patients of new services and treatments.
+Getting Started
+To access the RAK Hospital Medical Appointment System, please visit our website at www.rakhospital.com or download our mobile app on the App Store or Google Play. Patients can create a secure account and login to access the system and book their appointments.
+
+Support
+If you encounter any issues or have any questions regarding the RAK Hospital Medical Appointment System, please contact our support team at support@rakhospital.com or call us at +971 123456789.

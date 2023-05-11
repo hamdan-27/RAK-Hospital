@@ -260,7 +260,7 @@ function view_report()
       <td><input name='id' class='form-control' value='$id' readonly></td>
       <td>$patient_name</td>
       <td>$doctor_name</td>
-      <td>$diagnosis</td>S
+      <td>$diagnosis</td>
       <td>$psyc_status</td>   
       <td>$chronic_disease</td>   
       <td>$medications</td>   
@@ -336,7 +336,7 @@ function view_myreport()
 
       echo "<tr>
       <td>Dr. $doctor_name</td>
-      <td>$diagnosis</td>S
+      <td>$diagnosis</td>
       <td>$psyc_status</td>   
       <td>$chronic_disease</td>   
       <td>$medications</td>   

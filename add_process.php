@@ -87,9 +87,22 @@ else if (isset($_POST['orderdrug'])) {
     $patient = $_POST['patient-name'];
     $todayDate = date("Y-m-d");
     $stat = "successful";
+    $reg_by = '';
+
+    $sql0 = "SELECT * FROM `drug` WHERE `name` = '$drugname';";
+    $res0 = mysqli_query($conn, $sql0) or die(mysqli_error($conn));
+    $final0 = mysqli_num_rows($res0);
+    if ($final0 > 0) {
+        while ($row=mysqli_fetch_array($res0)) {
+            $reg_by = $row['registered_by'];
+        }
+    } else {
+        echo "<script>alert('No record found');</script>";
+    }
+
 
     $sql = "INSERT INTO orders 
-    VALUES(NULL, '$drugname', '$qty', '$address', '$patient', '$todayDate', '$stat');";
+    VALUES(NULL, '$drugname', '$qty', '$address', '$patient', '$todayDate', '$stat', '$reg_by');";
 
     $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
     if ($result) {
